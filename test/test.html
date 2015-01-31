@@ -1,0 +1,19 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Sense Test</title>
+    <link rel="stylesheet" media="all" href="vendors/mocha.css">
+    <script data-main="main" src="vendors/mocha.js"></script>
+    <script data-main="main" src="vendors/chai.js"></script>
+    <script type="text/javascript">
+			  mocha.setup('bdd');
+			  window.mochaRunCallback = function () {
+			  	mocha.run();
+			  }
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script data-main="main" src="vendors/require.js"></script>
+  </body>
+</html>
