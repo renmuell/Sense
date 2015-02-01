@@ -77,7 +77,7 @@ module.exports = function (grunt) {
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
       },
       all: [
         '<%= config.path.jsCore %>',
@@ -91,9 +91,6 @@ module.exports = function (grunt) {
           mainConfigFile: '<%= config.path.base %>/js/core/app.js',
           name: 'app',
           out: '<%= config.path.build %>/js/app.js',
-          preserveLicenseComments: true,
-          useStrict: true,
-          wrap: true
         }
       }
     },
@@ -140,9 +137,21 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: '<%= config.path.js %>/vendor/requirejs/',
-            src: ['require.js'],
-            dest: '<%= config.path.build %>/js/vendor/'
+            cwd: '<%= config.path.js %>/vendors/require-js-2.1.15/',
+            src: ['require.min.js'],
+            dest: '<%= config.path.build %>/vendors/'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.path.js %>/vendors/cannon-js-0.6.1/',
+            src: ['cannon.min.js'],
+            dest: '<%= config.path.build %>/vendors/cannon-js-0.6.1'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.path.base %>/css-vendors/',
+            src: ['**'],
+            dest: '<%= config.path.build %>/css/'
           }
         ]
       },
@@ -150,8 +159,8 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= config.path.js %>/vendor/requirejs/',
-            src: ['require.js'],
+            cwd: '<%= config.path.js %>/vendors/require-js-2.1.15/',
+            src: ['require.min.js'],
             dest: '<%= config.path.test %>/vendors/'
           }
         ]
@@ -159,7 +168,7 @@ module.exports = function (grunt) {
     },
     clean: {
       build: ['<%= config.path.build %>/**/*'],
-      test: ['<%= config.path.test %>/vendors/require.js'],
+      test: ['<%= config.path.test %>/vendors/require.min.js'],
     },
     mocha: {
       test: {

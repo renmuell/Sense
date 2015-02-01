@@ -17,6 +17,14 @@
     "trailing": true,
     "globals": {
         "requestAnimationFrame": false,
-        "THREE": true
+        "THREE": true,
+        "define": false,
+        /* MOCHA */
+        "describe"   : false,
+        "it"         : false,
+        "before"     : false,
+        "beforeEach" : false,
+        "after"      : false,
+        "afterEach"  : false
     }
 }
