@@ -1,5 +1,190 @@
-@color: #efefef;
+body{
+	background-color: #ddd;
+	margin:0;
+}
 
-body {
-	background-color: @color;
+.noCursor{
+	cursor: none;
+}
+
+#game {
+		cursor: none;
+	margin:0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+
+.message {
+	-webkit-animation: m-close 2s ease-in-out;
+	font-family:'Press Start 2P';
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+	padding:10px;
+	color:white;
+	opacity: 1;
+}
+
+@-webkit-keyframes m-close {
+	to {
+		 transform: translate(0,-100px);
+	}
+}
+
+aside {
+	border-left:1px #ddd solid;
+}
+
+kbd.oneKey {
+	width: 17px;
+}
+
+#intro {
+	position: absolute;
+	top:0;left:0;right:0;bottom:0;
+	overflow: hidden;
+}
+
+#holder {
+	position:relative;
+	border: 2px dashed #ccc;
+	width: 120px;
+	height: 130px;
+}
+
+#holder.hover {
+	border: 10px dashed #333;
+}
+
+#holder i {
+	font-size:100px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+#holder span {
+	font-size: 28px;
+	color:#333;
+	font-weight: bold;
+	position: absolute;
+	left:30px;
+	top:60px;
+}
+
+/******************************************************************************
+ * ft
+ *****************************************************************************/
+
+.ft {
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    overflow:hidden;
+    z-index: 10000;
+}
+
+.ft.fa-close {
+    -webkit-animation:ft-close 0.1s 1.5s ease-in-out forwards;
+}
+
+@-webkit-keyframes ft-close {
+    to {
+        bottom: 100%;
+    }
+}
+
+/******************************************************************************
+ * Message
+ *****************************************************************************/
+
+.ft .ft-message {
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    overflow:hidden;
+}
+
+.ft.fa-close .ft-message{
+    -webkit-animation:ft-message-close 0.5s ease-in-out forwards;
+}
+
+.ft.fa-open .ft-message{
+    opacity: 0;
+    -webkit-animation:ft-message-open 0.5s 1s ease-in-out forwards;
+}
+
+@-webkit-keyframes ft-message-close {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+
+@-webkit-keyframes ft-message-open {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+/******************************************************************************
+ * Tween
+ *****************************************************************************/
+
+.ft .ft-tween {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.ft .ft-tween:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.ft .ft-tween .ft-ring{
+    position: absolute;
+    margin:0;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius:50%;
+    box-shadow: 0 0 0px 100rem #12BDE8;
+}
+
+.ft.fa-close .ft-tween .ft-ring {
+    -webkit-animation: ft-ring-open 1s 0.5s ease-in-out forwards;
+}
+
+.ft.fa-open .ft-tween .ft-ring {
+  -webkit-animation: ft-ring-close 1s ease-in-out forwards;
+}
+
+@-webkit-keyframes ft-ring-open {
+    to {
+        width: 150rem;
+        height:150rem;
+    }
+}
+
+@-webkit-keyframes ft-ring-close {
+    from {
+        width: 150rem;
+        height:150rem;
+    }
+    to {
+        width: 0;
+        height:0;
+    }
 }

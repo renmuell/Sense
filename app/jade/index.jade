@@ -8,6 +8,56 @@ html(lang='en')
     meta(name='viewport', content='width=device-width')
     link(rel='stylesheet', href='css/normalize.css')
     link(rel='stylesheet', href='css/app.css')
+    link(rel='stylesheet', href='css/bootstrap-3.3.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/jasny-bootstrap-3.1.3/css/jasny-bootstrap.min.css')
+    link(href='http://fonts.googleapis.com/css?family=Press+Start+2P', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='css/keyscss/keys.css', type='text/css')
+    link(rel='stylesheet', href='css/font-awesome-4.3.0/css/font-awesome.css', type='text/css')
   body
-    h1 Welcome to Sense
-    script(data-main='js/app', src='vendors/require.min.js')
+    section#game
+    section#intro
+      .ft
+        .ft-tween
+          .ft-ring
+        .ft-message
+          div(clas='row')
+            .col-sm-8.col-sm-offset-2
+              br
+              .panel.panel-default
+                .panel-heading Web Game - Technical Prototype
+                .panel-body
+                  .row
+                    section.col-sm-8
+                      p Welcome
+                      button.btn.btn-default.start Start Game
+                    aside.col-sm-4
+                      h4 Instruction
+                      table.table.table-bordered
+                        tbody
+                          tr
+                            td(width='100')
+                              div
+                                kbd.oneKey(style='margin-left:20px;')
+                                  i.fa.fa-caret-up
+                                br
+                                kbd.oneKey
+                                  i.fa.fa-caret-left
+                                kbd.oneKey
+                                  i.fa.fa-caret-down
+                                kbd.oneKey
+                                  i.fa.fa-caret-right
+                              br
+                              div
+                                kbd.oneKey(style='margin-left:20px;') W
+                                br
+                                kbd.oneKey A
+                                kbd.oneKey S
+                                kbd.oneKey D
+                            td
+                              | Movement
+                          tr
+                            td(width='100')
+                              kbd esc
+                            td
+                              | Pause
+    script(data-main='js/app', src='js/vendors/require-js-2.1.15/require.min.js')

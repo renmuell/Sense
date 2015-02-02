@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"in",
+				"IntroPage"
+			],
+			[
+				"pro",
+				"Projectiles"
+			],
+			[
+				"get",
+				"getInstance"
+			],
+			[
+				"g",
+				"Goal"
+			],
+			[
+				"em",
+				"Emitter"
+			],
+			[
+				"de",
+				"debug"
+			],
+			[
+				"thr",
+				"THREE"
+			],
+			[
+				"re",
+				"registerTask"
+			],
+			[
 				"Sca",
 				"ScaleToNormal"
 			],
@@ -96,10 +128,6 @@
 				"checkIsOnGround"
 			],
 			[
-				"pro",
-				"projectile"
-			],
-			[
 				"l",
 				"length"
 			],
@@ -180,14 +208,6 @@
 				"WorldMusic"
 			],
 			[
-				"get",
-				"getAudioContext"
-			],
-			[
-				"de",
-				"deodeAudioData_Handler"
-			],
-			[
 				"sou",
 				"sourceJs"
 			],
@@ -218,10 +238,6 @@
 			[
 				"ren",
 				"render"
-			],
-			[
-				"re",
-				"reloadEndCallback_Hanlder"
 			],
 			[
 				"rea",
@@ -274,10 +290,6 @@
 			[
 				"sce",
 				"sceneBody"
-			],
-			[
-				"g",
-				"geometry"
 			],
 			[
 				"di",
@@ -502,38 +514,34 @@
 			[
 				"k",
 				"Keyboard"
-			],
-			[
-				"keyb",
-				"keyboard"
-			],
-			[
-				"D",
-				"DIR"
-			],
-			[
-				"Enum",
-				"EnumValue"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "app/index.html",
-			"settings":
-			{
-				"buffer_size": 364,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 47.0,
+		"height": 87.0,
 		"selected_items":
 		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"control",
+				"Package Control: Install Package"
+			],
+			[
+				"packet con",
+				"Package Control: Install Package"
+			],
 			[
 				"Install package",
 				"Package Control: Install Package"
@@ -556,10 +564,6 @@
 			],
 			[
 				"isnt",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			]
 		],
@@ -585,14 +589,59 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/renemueller/Projekte/sense",
-		"/Users/renemueller/Projekte/sense/app",
+		"/Users/renemueller/Projekte/sense/app/js/core",
+		"/Users/renemueller/Projekte/sense/app/js/core/entities",
+		"/Users/renemueller/Projekte/sense/app/media/effects",
+		"/Users/renemueller/Projekte/sense/app/media/music",
 		"/Users/renemueller/Projekte/sense/build",
-		"/Users/renemueller/Projekte/sense/node_modules",
-		"/Users/renemueller/Projekte/sense/test"
+		"/Users/renemueller/Projekte/sense/test/spec",
+		"/Users/renemueller/Projekte/sense/test/vendors"
 	],
 	"file_history":
 	[
+		"/Users/renemueller/Projekte/sense/app/js/core/introPage.js",
+		"/Users/renemueller/Projekte/sense/app/media/effects/readme.txt",
+		"/Users/renemueller/Projekte/sense/Gruntfile.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/effectAudio.js",
+		"/Users/renemueller/Projekte/sense/app/js/vendors-custom/threex/objcoord/threex.objcoord.js",
+		"/Users/renemueller/Projekte/sense/app/js/vendors-custom/threex/objcoord/change.log",
+		"/Users/renemueller/Projekte/sense/app/media/music/readme.txt",
+		"/Users/renemueller/Projekte/sense/app/jade/index.jade",
+		"/Users/renemueller/Projekte/sense/app/js/app.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/enum/dir.js",
+		"/Users/renemueller/Projekte/sense/app/less/app.less",
+		"/Users/renemueller/Projekte/sense/app/js/util/threeSetup.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/keyboard.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/mouse.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/hub.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/weapons/smg.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/entities/dummy.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/entities/player.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/entities/projectile.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/entities/projectiles.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/goal.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/backgroundMusic.js",
+		"/Users/renemueller/Projekte/sense/README.md",
+		"/Users/renemueller/Projekte/sense/app/js/core/levels/world.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/game.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/app.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/goal.js",
+		"/Users/renemueller/Projekte/sense/app/js/util/projectiles.js",
+		"/Users/renemueller/Projekte/sense/app/js/core/test.js",
+		"/Users/renemueller/Projekte/sense/app/js/vendors/cannon-js-0.6.1/cannon.min.js",
+		"/Users/renemueller/Projekte/sense/.jshintrc",
+		"/Users/renemueller/Projekte/sense/test/test.html",
+		"/Users/renemueller/Projekte/sense/build/js/app.js",
+		"/Users/renemueller/Projekte/sense/build/index.html",
+		"/Users/renemueller/Projekte/sense/app/js/vendor-custom/emitter-1.1.3/index.js",
+		"/Users/renemueller/Projekte/sense/app/js/vendor-custom/emitter-1.1.3/change.log",
+		"/Users/renemueller/Projekte/sense/app/humans.txt",
+		"/Users/renemueller/Projekte/sense/test/spec/test.js",
+		"/Users/renemueller/Projekte/sense/test/main.js",
+		"/Users/renemueller/Projekte/sense/package.json",
+		"/Users/renemueller/Projekte/sense/app/404.html",
+		"/Users/renemueller/Projekte/sense/app/css/normalize.css",
+		"/Users/renemueller/Projekte/sense/app/index.html",
 		"/Users/renemueller/Projekte/game/backup.css",
 		"/Users/renemueller/Projekte/game/js/introPage.js",
 		"/Users/renemueller/Projekte/game/index.html",
@@ -677,25 +726,11 @@
 		"/Users/renemueller/Documents/Projekte/djp/src/sass/main.sass",
 		"/Users/renemueller/Documents/Projekte/djp/src/jade/layout/base.jade",
 		"/Users/renemueller/Documents/Projekte/djp/index.html",
-		"/Users/renemueller/Documents/Projekte/djp/src/index.html",
-		"/Users/renemueller/Downloads/Chutzpah.3.2.1/ctz.bat",
-		"/Users/renemueller/Documents/Projekte/typescript/helper.ts",
-		"/Users/renemueller/Documents/Projekte/typescript/app.ts",
-		"/Users/renemueller/Documents/Projekte/typescript/index.css",
-		"/Users/renemueller/Documents/Projekte/typescript/options.tsc",
-		"/Users/renemueller/Documents/Projekte/typescript/index.html",
-		"/Users/renemueller/Documents/Projekte/NowHaveSomeFun/app/styles/main.scss",
-		"/Users/renemueller/Documents/Projekte/NowHaveSomeFun/app/scripts/router.js",
-		"/Users/renemueller/Documents/Projekte/NowHaveSomeFun/app/index.html",
-		"/Users/renemueller/Documents/Projekte/NowHaveSomeFun/app/styles/main.css",
-		"/Users/renemueller/Documents/Projekte/magic/app/styles/scss/main.scss",
-		"/Users/renemueller/Documents/Projekte/magic/app/styles/main.scss",
-		"/Users/renemueller/Documents/Projekte/magic/Gruntfile.js",
-		"/Users/renemueller/Documents/Projekte/magic/app/styles/main.css"
+		"/Users/renemueller/Documents/Projekte/djp/src/index.html"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -709,6 +744,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Dir",
+			"cannon",
+			"vendor/",
+			"require",
 			"ScaleBodyToNormal",
 			"ScaleBody",
 			"ScaleToNormal",
@@ -793,39 +832,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "app/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 364,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -902,7 +910,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 243.0,
+	"side_bar_width": 294.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -18,6 +18,7 @@ module.exports = function (grunt) {
       jade: base + '/jade',
       media: base + '/media',
       build: 'build',
+      debug: 'debug',
       test: 'test',
     },
     server: {
@@ -41,6 +42,12 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
+          base: ['<%= config.path.debug %>']
+        }
+      },
+      build: {
+        options: {
+          open: true,
           base: ['<%= config.path.build %>']
         }
       }
@@ -48,23 +55,19 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= config.path.jsAll %>'],
-        tasks: ['jshint', 'requirejs']
+        tasks: ['copy:debug']
       },
       jade: {
         files: ['<%= config.path.jade %>/**/*.jade'],
-        tasks: ['jade']
+        tasks: ['jade:debug']
       },
       less: {
         files: ['<%= config.path.less %>/**/*.less'],
-        tasks: ['less']
+        tasks: ['less:debug']
       },
       media: {
         files: ['<%= config.path.media %>/**'],
-        tasks: ['copy:main']
-      },
-      infos: {
-        files: ['<%= config.path.base %>/*'],
-        tasks: ['copy:main']
+        tasks: ['copy:debug']
       },
       reload: {
         options: {
@@ -79,23 +82,23 @@ module.exports = function (grunt) {
       options: {
         jshintrc: '.jshintrc',
       },
-      all: [
+      build: [
         '<%= config.path.jsCore %>',
         '<%= config.path.jsUtil %>'
       ]
     },
     requirejs: {
-      compile: {
+      build: {
         options: {
           baseUrl: '<%= config.path.base %>/js/core',
           mainConfigFile: '<%= config.path.base %>/js/core/app.js',
           name: 'app',
-          out: '<%= config.path.build %>/js/app.js',
+          out: '<%= config.path.build %>/js/core/app.js',
         }
       }
     },
     less: {
-      development: {
+      build: {
         options: {
           paths: ['<%= config.path.build %>/css]']
         },
@@ -103,10 +106,19 @@ module.exports = function (grunt) {
           '<%= config.path.build %>/css/normalize.css': '<%= config.path.less %>/normalize.less',
           '<%= config.path.build %>/css/app.css': '<%= config.path.less %>/app.less',
         }
-      }
+      },
+      debug: {
+        options: {
+          paths: ['<%= config.path.debug %>/css]']
+        },
+        files: {
+          '<%= config.path.debug %>/css/normalize.css': '<%= config.path.less %>/normalize.less',
+          '<%= config.path.debug %>/css/app.css': '<%= config.path.less %>/app.less',
+        }
+      },
     },
     jade: {
-      dist: {
+      build: {
         options: {
           pretty: true
         },
@@ -117,10 +129,22 @@ module.exports = function (grunt) {
           src: '*.jade',
           ext: '.html'
         }]
+      },
+      debug: {
+        options: {
+          pretty: true
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= config.path.jade %>',
+          dest: '<%= config.path.debug %>',
+          src: '*.jade',
+          ext: '.html'
+        }]
       }
     },
     copy: {
-      main: {
+      build: {
         files: [
           {
             expand: true,
@@ -139,19 +163,41 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= config.path.js %>/vendors/require-js-2.1.15/',
             src: ['require.min.js'],
-            dest: '<%= config.path.build %>/vendors/'
+            dest: '<%= config.path.build %>/js/vendors/require-js-2.1.15/'
           },
           {
             expand: true,
             cwd: '<%= config.path.js %>/vendors/cannon-js-0.6.1/',
             src: ['cannon.min.js'],
-            dest: '<%= config.path.build %>/vendors/cannon-js-0.6.1'
+            dest: '<%= config.path.build %>/js/vendors/cannon-js-0.6.1'
           },
           {
             expand: true,
             cwd: '<%= config.path.base %>/css-vendors/',
             src: ['**'],
             dest: '<%= config.path.build %>/css/'
+          }
+        ]
+      },
+      debug: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= config.path.media %>/',
+            src: ['**'],
+            dest: '<%= config.path.debug %>/media/'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.path.js %>/',
+            src: ['**'],
+            dest: '<%= config.path.debug %>/js/'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.path.base %>/css-vendors/',
+            src: ['**'],
+            dest: '<%= config.path.debug %>/css/'
           }
         ]
       },
@@ -169,6 +215,7 @@ module.exports = function (grunt) {
     clean: {
       build: ['<%= config.path.build %>/**/*'],
       test: ['<%= config.path.test %>/vendors/require.min.js'],
+      debug: ['<%= config.path.debug %>/**/*'],
     },
     mocha: {
       test: {
@@ -187,5 +234,44 @@ module.exports = function (grunt) {
       ]);
   });
 
-  grunt.registerTask('default', ['clean', 'jshint', 'copy:test','mocha', 'requirejs', 'less', 'jade', 'copy:main', 'serve']);
+  grunt.registerTask(
+    'Test',
+    [
+      'clean:test',
+      'copy:test',
+      'mocha:test'
+    ]);
+
+  grunt.registerTask(
+    'Hint',
+    [
+      'jshint:debug'
+    ]);
+
+  grunt.registerTask(
+    'Debug',
+    [
+      'clean:build',
+      'less:debug',
+      'jade:debug',
+      'copy:debug',
+      'serve'
+    ]);
+
+  grunt.registerTask(
+    'Build',
+    [
+      'clean:build',
+      'clean:test',
+      'copy:test',
+      'mocha:test',
+      'jshint:build',
+      'requirejs:build',
+      'less:build',
+      'jade:build',
+      'copy:build',
+      'connect:build'
+    ]);
+
+  grunt.registerTask('default', 'serve');
 };

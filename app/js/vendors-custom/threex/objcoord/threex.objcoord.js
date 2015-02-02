@@ -21,13 +21,13 @@ THREEx.ObjCoord	= function(object3d){
 THREEx.ObjCoord.worldPosition	= function(object3d){
 	object3d.updateMatrixWorld();
 	var worldMatrix	= object3d.matrixWorld;
-	var worldPos	= new THREE.Vector3().getPositionFromMatrix(worldMatrix);
+	var worldPos	= new THREE.Vector3().setFromMatrixPosition(worldMatrix);
 	return worldPos;
 }
 
 /**
  * get screen position
- * 
+ *
  * @param  {THREE.Object3D} object3d	the object3damera used to render
  * @param  {THREE.Camera} camera	the camera used to render
  * @return {THREE.Vector3}			the screen position
@@ -40,7 +40,7 @@ THREEx.ObjCoord.screenPosition	= function(object3d, camera){
 
 /**
  * get css position
- * 
+ *
  * @param  {THREE.Object3D} object3d	the object3damera used to render
  * @param  {THREE.Renderer} renderer	the renderer used to render
  * @param  {THREE.Camera} camera	the camera used to render
@@ -57,26 +57,23 @@ THREEx.ObjCoord.cssPosition	= function(object3d, camera, renderer){
 
 /**
  * convert world position to screen space
- * 
+ *
  * @param  {THREE.Vector3}	worldPosition	the world position
  * @param  {THREE.Camera}	tCamera       	the camera used to render
  * @return {THREE.Vector3}			the screen space position [-1, +1]
  */
 THREEx.ObjCoord.convertWorldToScreenSpace	= function(worldPosition, camera){
-	var projector	= this.projector || new THREE.Projector();
-	this.projector	= projector
-	var screenPos	= projector.projectVector(worldPosition.clone(), camera );
-	return screenPos;
+	return worldPosition.project(camera);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Comment								//
 //////////////////////////////////////////////////////////////////////////////////
 
-/** 
+/**
  * return the visible height *in 3d* of the plane facing the camera.
  * from http://stackoverflow.com/questions/13350875/three-js-width-of-view
- * 
+ *
  * @param {THREE.Camera} camera         current camera
  * @param {Number} distanceToCamera 	distance from the object to the camera
  */
@@ -88,11 +85,11 @@ THREEx.ObjCoord.VisiblePlaneHeight	= function(camera, distanceToCamera){
 
 
 
-/** 
- * return the visible width *in 3d* of the plane facing the camera. 
+/**
+ * return the visible width *in 3d* of the plane facing the camera.
  * It needs the renderer to get screen aspect.
  * from http://stackoverflow.com/questions/13350875/three-js-width-of-view
- * 
+ *
  * @param {THREE.Camera} camera         current camera
  * @param {THREE.Renderer} renderer     current renderer (to get screen aspect)
  * @param {Number} distanceToCamera 	distance from the object to the camera
@@ -100,13 +97,6 @@ THREEx.ObjCoord.VisiblePlaneHeight	= function(camera, distanceToCamera){
 THREEx.ObjCoord.VisiblePlaneWidth	= function(camera, renderer, distanceToCamera){
 	var planeHeight	= THREEx.ObjCoord.VisiblePlaneHeight(camera, distanceToCamera)
 	var aspect	= renderer.domElement.width / renderer.domElement.height;
-	var planeWidth	= planeHeight * aspect; 
+	var planeWidth	= planeHeight * aspect;
 	return planeWidth
 }
-
-
-
-
-
-
-
