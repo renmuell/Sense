@@ -47,7 +47,7 @@ HTML5 Game
 - Music vendors [app/media/music]
   - [slowmotion.mp3 | Royalty Free Music from Bensound - Slow Motion ](http://www.bensound.com/royalty-free-music/track/slow-motion)
 - Software
-  - [Node.js](http://nodejs.org/) 
+  - [Node.js](http://nodejs.org/)
   - [Yeoman.io](http://yeoman.io/)
   - [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
   - [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect)

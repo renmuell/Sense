@@ -24,22 +24,25 @@ html(lang='en')
             .col-sm-8.col-sm-offset-2
               br
               .panel.panel-default
-                .panel-heading Web Game - Technical Prototype
+                .panel-heading.pixelFont Web Game - Technical Prototype
                 .panel-body
                   .row
-                    section.col-sm-8
-                      p Welcome
-                      button.btn.btn-default.start Start Game
-                    aside.col-sm-4
-                      h4 Instruction
-                      table.table.table-bordered
+                    section
+                      .jumbotron
+                        h1.pixelFont Sense
+                        p
+                          | Simple HTML5 Game
+                        p
+                          button.btn.btn-default.start.col-sm-8.col-sm-offset-2.btn-lg Start Game
+                    h2.page-header
+                      | Manual
+                      table.table
                         tbody
                           tr
-                            td(width='100')
+                            td(width="300")
                               div
-                                kbd.oneKey(style='margin-left:20px;')
+                                kbd.oneKey
                                   i.fa.fa-caret-up
-                                br
                                 kbd.oneKey
                                   i.fa.fa-caret-left
                                 kbd.oneKey
@@ -48,8 +51,7 @@ html(lang='en')
                                   i.fa.fa-caret-right
                               br
                               div
-                                kbd.oneKey(style='margin-left:20px;') W
-                                br
+                                kbd.oneKey W
                                 kbd.oneKey A
                                 kbd.oneKey S
                                 kbd.oneKey D
@@ -60,4 +62,9 @@ html(lang='en')
                               kbd esc
                             td
                               | Pause
+                      include ./thanksTo.jade
+                .panel-footer
+                  label by Rene Müller
+                  a(href='https://github.com/renmuell/Sense')
+                    i.fa.fa-github
     script(data-main='js/app', src='js/vendors/require-js-2.1.15/require.min.js')

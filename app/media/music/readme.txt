@@ -1,1 +1,1 @@
-slowmotion = http://www.bensound.com/royalty-free-music/track/slow-motion;
+slowmotion = http://www.bensound.com/royalty-free-music/track/slow-motion

@@ -25,6 +25,7 @@ body{
 	padding:10px;
 	color:white;
 	opacity: 1;
+    overflow: hidden;
 }
 
 @-webkit-keyframes m-close {
@@ -33,13 +34,16 @@ body{
 	}
 }
 
-aside {
-	border-left:1px #ddd solid;
+.jumbotron {
+    padding:20px!important;
+    padding-bottom: 60px !important;
 }
 
-kbd.oneKey {
-	width: 17px;
+.pixelFont {
+    font-family:'Press Start 2P';
 }
+
+
 
 #intro {
 	position: absolute;
@@ -73,6 +77,11 @@ kbd.oneKey {
 	top:60px;
 }
 
+#intro .panel .row {
+    padding-left:10px;
+    padding-right: 10px;
+}
+
 /******************************************************************************
  * ft
  *****************************************************************************/
@@ -101,7 +110,7 @@ kbd.oneKey {
 .ft .ft-message {
     position:absolute;
     top:0;left:0;right:0;bottom:0;
-    overflow:hidden;
+    overflow:auto;
 }
 
 .ft.fa-close .ft-message{
