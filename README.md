@@ -1,7 +1,7 @@
 # Sense
 HTML5 Game
 
-- Work in progress
+- Work in progress, status: technical prototype
   - [done] Initial Setup done
   - [next Step] Performance optimization, Code cleanup
 
