@@ -4,55 +4,63 @@ define([
 
 	'use strict';
 
-	var instance = null;
+	var
 
-	function	EffectAudio() {
+	URL = 'media/effects/{{titel}}.ogg',
+
+	/* @type { EffectAudio } */
+	instance;
+
+	/**
+	 *  Effect Audio
+	 *  @constructor
+	 */
+	function EffectAudio() {
 		this.context = getAudioContext();
+		this.loadedSounds = {};
 	}
 
-	EffectAudio.prototype.load = function (name) {
-	};
-
-	EffectAudio.prototype.play = function (name, volume){
-		var that = this;
-		var url = 'media/effects/' + name + '.ogg';
-	  var request = new XMLHttpRequest();
-	  request.open('GET', url, true);
+	/**
+	 *  Loads effect audio
+	 *  @public
+	 *  @param {string} filename
+	 */
+	EffectAudio.prototype.load = function (filename) {
+		var that = this,
+				request = new XMLHttpRequest();
+	  request.open('GET', getUrl(filename), true);
 	  request.responseType = 'arraybuffer';
-
-	  // Decode asynchronously
-	  request.onload = function() {
-	    that.context.decodeAudioData(request.response, function(buffer) {
-	      var src = that.context.createBufferSource();
-	      src.buffer = buffer;
-	      src.connect(that.context.destination);
-	      src.start(0);
-	    });
-	  }
+	  request.onload = function () {
+	  	that.context.decodeAudioData(request.response, function (buffer) {
+	  		that.loadedSounds[filename] = buffer;
+	  	});
+	  };
 	  request.send();
 	};
 
-	EffectAudio.getInstance = function () {
-		if(instance === null) {
-			instance = new EffectAudio();
-		}
-		return instance;
+	/**
+	 *  Play loaded effect audio
+	 *  @public
+	 *  @param {string} filename
+	 *  @param {number} volume
+	 */
+	EffectAudio.prototype.play = function (filename, volume){
+			var src = this.context.createBufferSource();
+			var gain = this.context.createGain();
+      src.buffer = this.loadedSounds[filename];
+      src.connect(gain);
+      gain.connect(this.context.destination);
+      src.start(0);
 	};
 
-	return EffectAudio.getInstance();
+	return instance = instance || new EffectAudio();
+
+	function getUrl (filename) {
+		return URL.replace('{{titel}}', filename);
+	}
 
 	function getAudioContext () {
-		var context;
-		try {
-			if(typeof webkitAudioContext === 'function') {
-			   context = new webkitAudioContext();
-			} else {
-			   context = new AudioContext();
-			}
-		} catch (e) {
-
-		}
-		return context;
+		return webkitAudioContext ? new webkitAudioContext() : new AudioContext();
 	}
 
 });

@@ -7,7 +7,8 @@ define([
 	'./entities/projectiles',
 	'cannon',
 	'stats',
-	'./../util/backgroundMusic'
+	'./../util/backgroundMusic',
+	'./../util/effectAudio'
 ],function(
 	ThreeSetup,
 	Player,
@@ -17,7 +18,8 @@ define([
 	Projectiles,
 	CANNON,
 	Stats,
-	BackgroundMusic
+	BackgroundMusic,
+	EffectAudio
 ){
 
 	'use strict';
@@ -43,6 +45,7 @@ define([
 		Goal.on('finish', endGame.bind(this));
 
 		//StatsSetup.call(this);
+		loadEffectAudio();
 
 		BackgroundMusic.on('loaded', function () {
 			BackgroundMusic.play();
@@ -137,6 +140,23 @@ define([
 
 			frame.call(this);
 		}
+	}
+
+	function loadEffectAudio () {
+		EffectAudio.load('ah');
+		EffectAudio.load('colide');
+		EffectAudio.load('death');
+		EffectAudio.load('hello');
+		EffectAudio.load('hit');
+		EffectAudio.load('jump');
+		EffectAudio.load('kiss');
+		EffectAudio.load('oh2');
+		EffectAudio.load('ohyeah');
+		EffectAudio.load('open');
+		EffectAudio.load('ouch');
+		EffectAudio.load('reload');
+		EffectAudio.load('shoot');
+		EffectAudio.load('zing');
 	}
 
 	function PhysicSetup () {
