@@ -8,7 +8,9 @@ require.config({
     datGui : 'vendors/dat-gui-js-0.5/dat.gui',
     emitter: 'vendors-custom/emitter-1.1.3/index',
     objcoord: 'vendors-custom/threex/objcoord/threex.objcoord',
-    jquery: 'vendors/jquery-2.1.3/jquery-2.1.3'
+    jquery: 'vendors/jquery-2.1.3/jquery-2.1.3',
+    bootstrap: 'vendors/bootstrap-3.3.2/js/bootstrap',
+    bootstrapProgressbar : 'vendors/bootstrap-progressbar/js/bootstrap-progressbar'
   },
   shim: {
     three: {
@@ -32,6 +34,12 @@ require.config({
     objcoord :{
       deps: ['three'],
     },
+    bootstrap: {
+      deps: ['jquery']
+    },
+    bootstrapProgressbar: {
+      deps: ['jquery', 'bootstrap']
+    }
   }
 });
 

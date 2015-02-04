@@ -18,6 +18,7 @@ HTML5 Game
   - [stats.js](https://github.com/mrdoob/stats.js/)
   - [threex.rendererstats](https://github.com/jeromeetienne/threex.rendererstats)
   - [Underscore.js](http://underscorejs.org/)
+  - [bootstrap-progressbar](https://github.com/geersch/bootstrap-progressbar)
 - Customize Javascript vendors
   - [Emitter](https://github.com/component/emitter)
     - wrapped content inside require js function

@@ -1,5 +1,7 @@
 define([
+	'emitter'
 ],function(
+	Emitter
 ){
 
 	'use strict';
@@ -33,6 +35,7 @@ define([
 	  request.onload = function () {
 	  	that.context.decodeAudioData(request.response, function (buffer) {
 	  		that.loadedSounds[filename] = buffer;
+	  		that.emit('loaded');
 	  	});
 	  };
 	  request.send();
@@ -52,6 +55,8 @@ define([
       gain.connect(this.context.destination);
       src.start(0);
 	};
+
+	Emitter(EffectAudio.prototype);
 
 	return instance = instance || new EffectAudio();
 

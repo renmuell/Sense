@@ -32,6 +32,7 @@ define([
 		element.className = "message " + cssClass;
 
 		var position  	= THREEx.ObjCoord.cssPosition(sceneeBody, this.camera, this.renderer);
+
 		element.style.left  = (position.x-element.offsetWidth /2) +'px';
 		element.style.top   = (position.y-element.offsetHeight/2) - 50 +'px';
 		document.body.appendChild(element);

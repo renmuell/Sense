@@ -22,22 +22,18 @@ define([
 		}
 	}
 
-	BackgroundMusic.prototype.setup = function () {
-		if (!this._init) {
+	BackgroundMusic.prototype.load = function (filename) {
+		var that = this;
+		var url = 'media/music/' + filename;
+	  var request = new XMLHttpRequest();
+	  request.open('GET', url, true);
+	  request.responseType = 'arraybuffer';
 
-			this._init = true;
-			var that = this;
-			var url = 'media/music/slowmotion.mp3';
-		  var request = new XMLHttpRequest();
-		  request.open('GET', url, true);
-		  request.responseType = 'arraybuffer';
-
-		  // Decode asynchronously
-		  request.onload = function() {
-		    that.context.decodeAudioData(request.response, deodeAudioData_Handler.bind(that));
-		  }
-		  request.send();
-		}
+	  // Decode asynchronously
+	  request.onload = function() {
+	    that.context.decodeAudioData(request.response, deodeAudioData_Handler.bind(that));
+	  }
+	  request.send();
 	};
 
 	BackgroundMusic.prototype.hasStarted = function () {

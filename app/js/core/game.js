@@ -8,7 +8,7 @@ define([
 	'cannon',
 	'stats',
 	'./../util/backgroundMusic',
-	'./../util/effectAudio'
+	'./../util/loader'
 ],function(
 	ThreeSetup,
 	Player,
@@ -19,7 +19,7 @@ define([
 	CANNON,
 	Stats,
 	BackgroundMusic,
-	EffectAudio
+	Loader
 ){
 
 	'use strict';
@@ -30,6 +30,13 @@ define([
 	function Game () {
 		this.isRunning = false;
 		this.lastFrameTime;
+
+		Loader.on('loaded', function (){
+			$('#intro').show();
+			$('#load').hide();
+		});
+
+		Loader.load();
 
 		this.threeSetup = new ThreeSetup();
 		this.scene = this.threeSetup.scene;
@@ -44,17 +51,12 @@ define([
 		Goal.setup(this.scene, this.physicWorld);
 		Goal.on('finish', endGame.bind(this));
 
-		//StatsSetup.call(this);
-		loadEffectAudio();
-
-		BackgroundMusic.on('loaded', function () {
-			BackgroundMusic.play();
-		});
+		StatsSetup.call(this);
 	}
 
 	Game.prototype.run = function (){
 		if (!this.isRunning) {
-			BackgroundMusic.setup();
+			BackgroundMusic.play();
 			this.isRunning = true;
 			frame.call(this);
 		}
@@ -77,15 +79,16 @@ define([
 	 */
 	function frame (timestamp){
 		var timeDelta;
-		//this.stats.begin();
+		this.stats.begin();
 		try {
 			if (this.isRunning) {
+
 				timeDelta = Date.now() - (this.lastFrameTime || Date.now());
 				this.lastFrameTime = Date.now();
 
-				logic.call(this, timeDelta);
+				logic.call(this, timeDelta / 1000);
 
-				this.physicWorld.step(1/60);
+				this.physicWorld.step(timeDelta / 1000);
 				applyPhysic.call(this);
 
 				draw.call(this);
@@ -96,7 +99,7 @@ define([
 			this.isRunning = false;
 			console.log(e);
 		}
-		//this.stats.end();
+		this.stats.end();
 	}
 
 	/**
@@ -132,6 +135,7 @@ define([
 				$(this).off('webkitAnimationEnd');
 			});
 		} else {
+			this.lastFrameTime = undefined;
 			this.isRunning = true;
 			$('.ft').removeClass('fa-open').addClass('fa-close');
 			if (BackgroundMusic.hasStarted()) {
@@ -140,23 +144,6 @@ define([
 
 			frame.call(this);
 		}
-	}
-
-	function loadEffectAudio () {
-		EffectAudio.load('ah');
-		EffectAudio.load('colide');
-		EffectAudio.load('death');
-		EffectAudio.load('hello');
-		EffectAudio.load('hit');
-		EffectAudio.load('jump');
-		EffectAudio.load('kiss');
-		EffectAudio.load('oh2');
-		EffectAudio.load('ohyeah');
-		EffectAudio.load('open');
-		EffectAudio.load('ouch');
-		EffectAudio.load('reload');
-		EffectAudio.load('shoot');
-		EffectAudio.load('zing');
 	}
 
 	function PhysicSetup () {
