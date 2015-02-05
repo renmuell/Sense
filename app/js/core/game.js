@@ -86,7 +86,7 @@ define([
 				timeDelta = Date.now() - (this.lastFrameTime || Date.now());
 				this.lastFrameTime = Date.now();
 
-				logic.call(this, timeDelta / 1000);
+				logic.call(this, timeDelta);
 
 				this.physicWorld.step(timeDelta / 1000);
 				applyPhysic.call(this);

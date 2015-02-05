@@ -50,7 +50,7 @@ define([
 	return ThreeSetup;
 
 	function rendererSetup () {
-			this.renderer = new THREE.WebGLRenderer({ antialias: true});
+			this.renderer = new THREE.WebGLRenderer({ antialias: true, devicePixelRatio : 1});
 			this.renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
 			this.renderer.setSize( window.innerWidth, window.innerHeight );
 

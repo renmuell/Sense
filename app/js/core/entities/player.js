@@ -145,7 +145,7 @@ define([
 
 	function CheckGreeting_Offset () {
 		EffectAudio.play('hello', 0.5);
-		var element = Hub.showText(this.drawBody, GREETING_TEXT, 'fade');
+		var element = Hub.showText(this.drawBody, GREETING_TEXT, '');
 		setTimeout( CheckGreeting_RemoveText.bind(element), GREETING_REMOVE_TIME);
 		$('#intro').addClass('noCursor');
 	}
@@ -381,7 +381,7 @@ define([
 
 	function ReloadStartCallback_Hanlder () {
 		EffectAudio.play('reload');
-		this.text = Hub.showText(this.drawBody, RELOADING_TEXT, 'fade');
+		this.text = Hub.showText(this.drawBody, RELOADING_TEXT, '');
 		this.drawBody.material.color = new THREE.Color( COLOR_RELOAD );
 	}
 

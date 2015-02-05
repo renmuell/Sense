@@ -1,8 +1,10 @@
 define([
 	'three',
+	'datGui',
 	'objcoord'
 ],function(
-	THREE
+	THREE,
+	dat
 ) {
 
 	'use strict';
@@ -11,6 +13,7 @@ define([
 	instance = null;
 
 	function	Hub() {
+		this.settings = new dat.GUI();
 	}
 
 	Hub.prototype.init = function (camera, renderer) {

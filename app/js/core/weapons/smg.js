@@ -39,7 +39,7 @@ define([
 		this.magazineSize = 15;
 		this.currentMagazineSize = this.magazineSize;
 
-		this.shootingTimePerRound = 1000;
+		this.shootingTimePerRound = 100;
 		this.currentShootingTimePerRound = 0;
 	}
 
@@ -120,8 +120,8 @@ define([
 		position.z += direction.z * 2;
 
 		var that = this;
-		EffectAudio.play('kiss');
-		setTimeout(function (){
+		EffectAudio.play('shoot');
+		//setTimeout(function (){
 			that.emit('fire', {
 				recoilFeedback:direction.clone().multiplyScalar(that.recoil),
 			});
@@ -132,6 +132,6 @@ define([
 				position: position,
 				mass: 2
 			}));
-		}, 1000);
+		//}, 1000);
 	}
 });

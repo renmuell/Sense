@@ -78,7 +78,7 @@ define([
   		this.config.position.z);
 
 		body.addEventListener("collide",function(e){
-			var element = Hub.showText(that.sceneBody, 'Hit', 'fade');
+			var element = Hub.showText(that.sceneBody, 'Hit', '');
 			setTimeout( function () {
 				Hub.removeText(element);
 			}, 200);
