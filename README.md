@@ -19,6 +19,7 @@ HTML5 Game
   - [threex.rendererstats](https://github.com/jeromeetienne/threex.rendererstats)
   - [Underscore.js](http://underscorejs.org/)
   - [bootstrap-progressbar](https://github.com/geersch/bootstrap-progressbar)
+  - [stemkoski.github.com for TextureAnimator()](https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Animation.html)
 - Customize Javascript vendors
   - [Emitter](https://github.com/component/emitter)
     - wrapped content inside require js function

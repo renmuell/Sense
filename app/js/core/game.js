@@ -109,7 +109,7 @@ define([
 		Player.Logic(timeDelta);
 		Projectiles.logic(this.scene, this.physicWorld);
 		World.logic(timeDelta);
-		Goal.logic();
+		Goal.logic(timeDelta, this.threeSetup.camera);
 	}
 
 	function applyPhysic () {

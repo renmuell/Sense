@@ -26,13 +26,13 @@ define([
 		addDummies.call(this);
 	};
 
-	Goal.prototype.logic = function () {
+	Goal.prototype.logic = function (timeDelta, camera) {
 		var hitCount  = 0;
 		for (var i = this.dummies.length - 1; i >= 0; i--) {
 			if (this.dummies[i]) {
 				if(this.dummies[i].playerHit) { hitCount++; }
 
-				this.dummies[i].logic(this.scene, this.physicWorld);
+				this.dummies[i].logic(this.scene, this.physicWorld, timeDelta, camera);
 			}
 		}
 		if (hitCount === this.dummies.length) {
