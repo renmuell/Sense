@@ -7,6 +7,7 @@ require.config({
     rendererstats: 'vendors/threex/rendererstats/threex.rendererstats',
     datGui : 'vendors/dat-gui-js-0.5/dat.gui',
     emitter: 'vendors-custom/emitter-1.1.3/index',
+    textureAnimator: 'vendors-custom/textureAnimator/textureAnimator',
     objcoord: 'vendors-custom/threex/objcoord/threex.objcoord',
     jquery: 'vendors/jquery-2.1.3/jquery-2.1.3',
     bootstrap: 'vendors/bootstrap-3.3.2/js/bootstrap',

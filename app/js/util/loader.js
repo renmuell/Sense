@@ -1,6 +1,7 @@
 define([
-	'./../util/backgroundMusic',
-	'./../util/effectAudio',
+	'./backgroundMusic',
+	'./effectAudio',
+	'./textureManager',
 	'emitter',
 	'jquery',
 	'bootstrap',
@@ -8,6 +9,7 @@ define([
 ],function(
 	BackgroundMusic,
 	EffectAudio,
+	TextureManager,
 	Emitter,
 	$
 ){
@@ -20,7 +22,14 @@ define([
 	talking = [
 		'(*_*)',
 		'd(o_o)b',
-		'(-_-)'
+		'(-_-)',
+		'(╯°□°）╯︵ ┻━┻',
+		'(๑>ᴗ<๑)',
+		'(¬､¬)',
+		'ლ(ಠ益ಠლ',
+		'(^._.^)ﾉ',
+		'ε===(っ≧ω≦)っ',
+		'|ω・）'
 	],
 	resources =
 	[
@@ -39,6 +48,7 @@ define([
 		[EffectAudio, 'reload'],
 		[EffectAudio, 'shoot'],
 		[EffectAudio, 'zing'],
+		[TextureManager, { name: 'emotion_normal', path: 'media/img/emotion/normal.png' }],
 	];
 
 	function Loader() {
@@ -52,12 +62,9 @@ define([
 		    step: 100/resources.length
 		});
 
-		BackgroundMusic.on('loaded', function () {
-			that.step();
-		});
-		EffectAudio.on('loaded', function () {
-			that.step();
-		});
+		BackgroundMusic.on('loaded', function () { that.step(); });
+		EffectAudio.on('loaded', function () { that.step(); });
+		TextureManager.on('loaded', function () { that.step(); });
 	}
 
 	Loader.prototype.step = function () {
