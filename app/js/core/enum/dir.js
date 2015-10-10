@@ -1,9 +1,4 @@
-define([
-],function(
-){
-
-	'use strict';
-
+define([],function(){
 	return {
 		UP		: 1,
 		DOWN	: 2,
@@ -12,5 +7,4 @@ define([
 		LEFT	: 5,
 		RIGHT	: 6
 	};
-
 });

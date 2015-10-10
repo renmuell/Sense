@@ -17,8 +17,6 @@ define([
 	'use strict';
 
 	var
-
-	instance = null,
 	talking = [
 		'(*_*)',
 		'd(o_o)b',
@@ -29,7 +27,17 @@ define([
 		'ლ(ಠ益ಠლ',
 		'(^._.^)ﾉ',
 		'ε===(っ≧ω≦)っ',
-		'|ω・）'
+		'|ω・）',
+		'( •̀ω•́ )σ',
+		'(シ_ _)シ',
+		'⋋( ◕ ∧ ◕ )⋌',
+		'(=^･^=)',
+		'~(=^–^)',
+		'(☉_☉)',
+		'~(‾▿‾~)',
+		'(×_×;）',
+		'(Ｕ^ω^)',
+		'(-｀ω´-,,)'
 	],
 	resources =
 	[
@@ -49,52 +57,48 @@ define([
 		[EffectAudio, 'shoot'],
 		[EffectAudio, 'zing'],
 		[TextureManager, { name: 'emotion_normal', path: 'media/img/emotion/normal.png' }],
-	];
+	],
+	progressbarData = {
+	    maximum: 100,
+	    warningMarker: 100,
+	    dangerMarker: 100,
+	    step: 100/resources.length
+	};
 
 	function Loader() {
-		var that = this;
 		this.numLoaded = 0;
 
-		$('#load .progressbar').progressbar({
-		    maximum: 100,
-		    warningMarker: 100,
-		    dangerMarker: 100,
-		    step: 100/resources.length
-		});
+		this.$progressbar = $('#load .progressbar');
+		this.$progressbarTalking = $('.progressbar-talking');
 
-		BackgroundMusic.on('loaded', function () { that.step(); });
-		EffectAudio.on('loaded', function () { that.step(); });
-		TextureManager.on('loaded', function () { that.step(); });
+		this.$progressbar.progressbar(progressbarData);
+
+		BackgroundMusic.on('loaded', this.step.bind(this) );
+		EffectAudio.on('loaded', this.step.bind(this));
+		TextureManager.on('loaded', this.step.bind(this));
 	}
 
-	Loader.prototype.step = function () {
-		this.numLoaded++;
-		this.check();
-		$('#load .progressbar').progressbar('stepIt');
-		$('.progressbar-talking').html(talking[Math.floor(Math.random() *  talking.length )]);
-	};
-
-	Loader.prototype.load = function () {
-		for(var index = 0, count = resources.length - 1; count >= 0; count--, index++) {
-			resources[index][0].load(resources[index][1]);
+	Loader.prototype = {
+		step: function () {
+			if (++this.numLoaded === resources.length) {
+				this.emit('loaded');
+			} else {
+				this.$progressbar.progressbar('stepIt');
+				this.$progressbarTalking.html(this._getTalking());
+			}
+		},
+		load: function () {
+			for(var i = resources.length - 1; i >= 0; i--) {
+				resources[i][0].load(resources[i][1]);
+			}
+		},
+		_getTalking: function (){
+			return talking[Math.floor(Math.random() * talking.length)];
 		}
 	};
 
-	Loader.prototype.check = function () {
-		if (this.numLoaded == resources.length) {
-			this.emit('loaded');
-		}
-	}
+	Emitter(Loader.prototype); // jshint ignore:line
 
-	Loader.getInstance = function () {
-		if (instance === null) {
-			instance = new Loader();
-		}
-		return instance;
-	};
-
-	Emitter(Loader.prototype);
-
-	return Loader.getInstance();
+	return new Loader();
 
 });

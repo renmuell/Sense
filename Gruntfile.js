@@ -90,10 +90,10 @@ module.exports = function (grunt) {
     requirejs: {
       build: {
         options: {
-          baseUrl: '<%= config.path.base %>/js/core',
-          mainConfigFile: '<%= config.path.base %>/js/core/app.js',
+          baseUrl: '<%= config.path.base %>/js',
+          mainConfigFile: '<%= config.path.base %>/js/app.js',
           name: 'app',
-          out: '<%= config.path.build %>/js/core/app.js',
+          out: '<%= config.path.build %>/js/app.js',
         }
       }
     },
@@ -161,19 +161,19 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: '<%= config.path.js %>/vendors/require-js-2.1.15/',
-            src: ['require.min.js'],
-            dest: '<%= config.path.build %>/js/vendors/require-js-2.1.15/'
+            cwd: '<%= config.path.js %>/vendors/require-js-2.1.20/',
+            src: ['require.js'],
+            dest: '<%= config.path.build %>/js/vendors/require-js-2.1.20/'
           },
           {
             expand: true,
-            cwd: '<%= config.path.js %>/vendors/cannon-js-0.6.1/',
-            src: ['cannon.min.js'],
-            dest: '<%= config.path.build %>/js/vendors/cannon-js-0.6.1'
+            cwd: '<%= config.path.js %>/vendors/cannon-js-0.6.2/',
+            src: ['cannon.js'],
+            dest: '<%= config.path.build %>/js/vendors/cannon-js-0.6.2'
           },
           {
             expand: true,
-            cwd: '<%= config.path.base %>/css-vendors/',
+            cwd: '<%= config.path.base %>/vendors-css/',
             src: ['**'],
             dest: '<%= config.path.build %>/css/'
           }
@@ -195,7 +195,7 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: '<%= config.path.base %>/css-vendors/',
+            cwd: '<%= config.path.base %>/vendors-css/',
             src: ['**'],
             dest: '<%= config.path.debug %>/css/'
           }
@@ -205,8 +205,8 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= config.path.js %>/vendors/require-js-2.1.15/',
-            src: ['require.min.js'],
+            cwd: '<%= config.path.js %>/vendors/require-js-2.1.20/',
+            src: ['require.js'],
             dest: '<%= config.path.test %>/vendors/'
           }
         ]
@@ -214,7 +214,7 @@ module.exports = function (grunt) {
     },
     clean: {
       build: ['<%= config.path.build %>/**/*'],
-      test: ['<%= config.path.test %>/vendors/require.min.js'],
+      test: ['<%= config.path.test %>/vendors/require.js'],
       debug: ['<%= config.path.debug %>/**/*'],
     },
     mocha: {
@@ -245,13 +245,13 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'Hint',
     [
-      'jshint:debug'
+      'jshint:build'
     ]);
 
   grunt.registerTask(
     'Debug',
     [
-      'clean:build',
+      'clean:debug',
       'less:debug',
       'jade:debug',
       'copy:debug',
@@ -270,7 +270,8 @@ module.exports = function (grunt) {
       'less:build',
       'jade:build',
       'copy:build',
-      'connect:build'
+      'connect:build',
+      'watch'
     ]);
 
   grunt.registerTask('default', 'serve');

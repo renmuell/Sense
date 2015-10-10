@@ -1,44 +1,33 @@
 define([
 	'jquery',
-	'emitter',
-	'./../util/effectAudio'
+	'emitter'
 ],function(
 	$,
-	Emitter,
-	EffectAudio
-) {
+	Emitter
+){
 
 	'use strict';
 
-	var
-
-	instance = null;
-
-	function	IntroPage() {
+	function IntroPage() {
 	}
 
-	IntroPage.prototype.setup = function () {
-		$('#intro').addClass('open');;
+	IntroPage.prototype = {
+		setup: function () {
+			var that = this;
 
-		//EffectAudio.play('open');
+			$('#intro').addClass('open');
 
-		var
-		that = this;
+			//EffectAudio.play('open');
 
-		$('.start').click(function(){
-			$(this).blur();
+			$('.start').click(function(){
+				$(this).blur();
 				that.emit('startGame');
-		});
-	};
-
-	Emitter(IntroPage.prototype);
-
-	IntroPage.getInstance = function () {
-		if (instance === null) {
-			instance = new IntroPage();
+			});
 		}
-		return instance;
 	};
 
-	return IntroPage.getInstance();
+	Emitter(IntroPage.prototype); // jshint ignore:line
+
+	return new IntroPage();
+
 });

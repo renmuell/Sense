@@ -8,33 +8,24 @@ define([
 
 	'use strict';
 
-	var
-	instance = null;
-
 	function	TextureManager() {
 		this.textures = {};
 	}
 
-	TextureManager.prototype.load = function (texture) {
-		var that = this;
-		this.textures[texture.name] = THREE.ImageUtils.loadTexture(texture.path, undefined, function () {
-			that.emit('loaded');
-		});
+	TextureManager.prototype = {
+		load: function (texture) {
+			this.textures[texture.name] = THREE.ImageUtils.loadTexture(texture.path, undefined, this._loadTextureHandler.bind(this));
+		},
+		get: function (name) {
+			return this.textures[name];
+		},
+		_loadTextureHandler: function(){
+			this.emit('loaded');
+		},
 	};
 
-	TextureManager.prototype.get = function (name) {
-		return this.textures[name];
-	};
+	Emitter(TextureManager.prototype); // jshint ignore:line
 
-	Emitter(TextureManager.prototype);
-
-	TextureManager.getInstance = function () {
-		if (instance === null) {
-			instance = new TextureManager();
-		}
-		return instance;
-	}
-
-	return TextureManager.getInstance();
+	return new TextureManager();
 
 });

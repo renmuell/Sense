@@ -1,0 +1,44 @@
+.row
+  section
+    .jumbotron
+      h1.pixelFont Sense
+      p
+        | Simple HTML5 Game
+      p
+        button.btn.btn-default.col-xs-12.start.btn-lg Start Game
+  h2.page-header
+    | Manual
+    table.table
+      tbody
+        tr
+          td(width="300")
+            div.moveKey.sm
+              kbd.oneKey.sm
+                i.fa.fa-caret-up
+              br
+              kbd.oneKey.sm
+                i.fa.fa-caret-left
+              kbd.oneKey.sm
+                i.fa.fa-caret-down
+              kbd.oneKey.sm
+                i.fa.fa-caret-right
+            div.moveKey
+              kbd.oneKey W
+              br
+              kbd.oneKey A
+              kbd.oneKey S
+              kbd.oneKey D
+          td
+            | Movement
+        tr
+          td(width='100')
+            //<!-- Mouse Left Click icon by Icons8 -->
+            img(class="icon icons8-Mouse-Left-Click", src="data:image/png;base64,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", width="100", height="100")
+          td
+            | Shoot
+        tr
+          td(width='100')
+            kbd.oneKey.sm esc
+          td
+            | Pause
+    include ./thanksTo.jade

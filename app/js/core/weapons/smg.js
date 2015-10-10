@@ -24,7 +24,7 @@ define([
 		CONTINUOUS:3
 	};
 
-	function SMG(scene, physicWorld) {
+	function SMG() {
 		this.triggerPressed = false;
 		this.isShooting = false;
 		this.canShoot = true;
@@ -43,95 +43,99 @@ define([
 		this.currentShootingTimePerRound = 0;
 	}
 
-	SMG.prototype.pullTrigger = function (){
-		this.triggerPressed = true;
-	};
+	SMG.prototype = {
 
-	SMG.prototype.releaseTrigger = function () {
-		this.triggerPressed = false;
-	};
+		pullTrigger: function (){
+			this.triggerPressed = true;
+		},
 
-	SMG.prototype.switchFireMode = function () {
-		switch(this.fireMode) {
-			case FIRE_MODES.SINGLE : {
-				this.fireMode = FIRE_MODES.BURST;
-				break;
+		releaseTrigger: function () {
+			this.triggerPressed = false;
+		},
+
+		switchFireMode: function () {
+			switch(this.fireMode) {
+				case FIRE_MODES.SINGLE : {
+					this.fireMode = FIRE_MODES.BURST;
+					break;
+				}
+				case FIRE_MODES.BURST : {
+					this.fireMode = FIRE_MODES.CONTINUOUS;
+					break;
+				}
+				default: {
+					this.fireMode = FIRE_MODES.SINGLE;
+				}
 			}
-			case FIRE_MODES.BURST : {
-				this.fireMode = FIRE_MODES.CONTINUOUS;
-				break;
-			}
-			default: {
-				this.fireMode = FIRE_MODES.SINGLE;
-			}
-		}
-	};
+		},
 
-	SMG.prototype.logic = function (timeDelta, playerPosition) {
-		if (this.canShoot) {
-			if (this.triggerPressed && this.currentMagazineSize > 0) {
-				this.canShoot = false;
-				this.isShooting = true;
-				this.currentMagazineSize--;
+		logic: function (timeDelta, playerPosition) {
+			if (this.canShoot) {
+				if (this.triggerPressed && this.currentMagazineSize > 0) {
+					this.canShoot = false;
+					this.isShooting = true;
+					this.currentMagazineSize--;
 
-				fireShot.call(this, playerPosition);
+					this._fireShot(playerPosition);
 
-			} else if (this.currentMagazineSize === 0) {
-				this.emit('reloadStart');
-				this.canShoot = false;
-				this.isReloading = true;
-				this.currentReloadTime = 0;
-			}
-		} else if (this.isReloading) {
-			this.currentReloadTime += timeDelta;
-			if (this.currentReloadTime >= this.reloadTime) {
-				this.emit('reloadEnd');
-				this.canShoot = true;
-				this.isReloading = false;
-				this.currentMagazineSize = 15;
-			}
-
-		} else if (this.isShooting){
-			this.currentShootingTimePerRound += timeDelta;
-			if (this.currentShootingTimePerRound >= this.shootingTimePerRound) {
+				} else if (this.currentMagazineSize === 0) {
+					this.emit('reloadStart');
+					this.canShoot = false;
+					this.isReloading = true;
+					this.currentReloadTime = 0;
+				}
+			} else if (this.isReloading) {
+				this.currentReloadTime += timeDelta;
+				if (this.currentReloadTime >= this.reloadTime) {
+					this.emit('reloadEnd');
 					this.canShoot = true;
-					this.isShooting = false;
-					this.currentShootingTimePerRound = 0;
+					this.isReloading = false;
+					this.currentMagazineSize = 15;
+				}
+
+			} else if (this.isShooting){
+				this.currentShootingTimePerRound += timeDelta;
+				if (this.currentShootingTimePerRound >= this.shootingTimePerRound) {
+						this.canShoot = true;
+						this.isShooting = false;
+						this.currentShootingTimePerRound = 0;
+				}
 			}
+		},
+
+		_fireShot: function (playerPosition) {
+			var direction = Mouse.getDirectionTo(
+				playerPosition.x,
+				playerPosition.y,
+				playerPosition.z);
+
+			var position = playerPosition.clone();
+
+			position.x += direction.x * 2;
+			position.y += direction.y * 2;
+			position.z += direction.z * 2;
+
+			EffectAudio.play('shoot');
+			//setTimeout(function (){
+				this.emit('fire', {
+					recoilFeedback:direction.clone().multiplyScalar(this.recoil),
+				});
+
+				Projectiles.add(new Projectile({
+					direction: direction,
+					velocity: 100,
+					position: position,
+					mass: 2
+				}));
+			//}, 1000);
 		}
+
 	};
 
 	SMG.FIRE_MODES = FIRE_MODES;
 
-	Emitter(SMG.prototype);
+	Emitter(SMG.prototype); // jshint ignore:line
 
 	return SMG;
 
-	function fireShot (playerPosition) {
-		var direction = Mouse.getDirectionTo(
-			playerPosition.x,
-			playerPosition.y,
-			playerPosition.z);
-
-		var position = playerPosition.clone();
-
-		position.x += direction.x * 2;
-		position.y += direction.y * 2;
-		position.z += direction.z * 2;
-
-		var that = this;
-		EffectAudio.play('shoot');
-		//setTimeout(function (){
-			that.emit('fire', {
-				recoilFeedback:direction.clone().multiplyScalar(that.recoil),
-			});
-
-			Projectiles.add(new Projectile({
-				direction: direction,
-				velocity: 100,
-				position: position,
-				mass: 2
-			}));
-		//}, 1000);
-	}
 });

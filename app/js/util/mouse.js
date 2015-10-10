@@ -1,98 +1,91 @@
-define([
-],function(
-){
-
+define([],function(){
 	'use strict';
-
-	var instance = null;
 
 	function	Mouse() {
 		this.collidableMeshList = [];
 	}
 
-	Mouse.prototype.init = function(scene, camera) {
-		this.camera = camera;
-		this.scene = scene;
-		sceneSetup.call(this, scene);
-		document.addEventListener("mousemove", mousemoveHandler.bind(this));
-		this.mouseX = window.innerWidth/2;
-		this.mosueY = window.innerHeight/2;
-	};
+	Mouse.prototype = {
 
-	Mouse.prototype.addSceneBody = function (body) {
-		this.collidableMeshList.push(body);
-	};
+		init: function(scene, camera) {
+			this.camera = camera;
+			this.scene = scene;
+			this.sceneSetup(scene);
+			document.addEventListener('mousemove',
+				this._mousemoveHandler.bind(this));
+			this.mouseX = window.innerWidth/2;
+			this.mosueY = window.innerHeight/2;
+		},
 
-	Mouse.prototype.logic = function () {
-		var vector, dir, distance, pos, ray, collisionResults;
+		addSceneBody: function (body) {
+			this.collidableMeshList.push(body);
+		},
 
-		vector = new THREE.Vector3();
+		logic: function () {
+			var vector, dir, distance, pos, ray, collisionResults;
 
-		vector.set(
-			(this.mouseX/ window.innerWidth)*2-1,
-			-(this.mosueY /window.innerHeight)*2+1,
-			0.5);
+			vector = new THREE.Vector3();
 
-		vector.unproject(this.camera);
+			vector.set(
+				(this.mouseX/ window.innerWidth)*2-1,
+				-(this.mosueY /window.innerHeight)*2+1,
+				0.5);
 
-		dir = vector.sub(this.camera.position).normalize();
+			vector.unproject(this.camera);
 
-		distance = -this.camera.position.z/dir.z;
+			dir = vector.sub(this.camera.position).normalize();
 
-		ray = new THREE.Raycaster(this.camera.position, dir.normalize()),
+			distance = -this.camera.position.z/dir.z;
 
-		collisionResults = ray.intersectObjects(this.collidableMeshList);
+			ray = new THREE.Raycaster(this.camera.position, dir.normalize());
 
-		if (collisionResults.length > 0 && collisionResults[0].distance < distance) {
-			pos = collisionResults[0].point.clone();
-		} else {
-			pos = this.camera.position.clone().add(dir.multiplyScalar(distance));
-		}
+			collisionResults = ray.intersectObjects(this.collidableMeshList);
 
-		this.sceneBody.position.x = pos.x;
-		this.sceneBody.position.y = pos.y;
-		this.sceneBody.position.z = pos.z;
-	};
-
-	Mouse.prototype.removeSceneBody = function(body) {
-		var pos;
-		for (var index = 0, count = this.collidableMeshList.length - 1; count >= 0; count--, index++) {
-			if (this.collidableMeshList[index].id === body.id){
-				pos = index;
-				break;
+			if (collisionResults.length > 0 && collisionResults[0].distance < distance) {
+				pos = collisionResults[0].point.clone();
+			} else {
+				pos = this.camera.position.clone().add(dir.multiplyScalar(distance));
 			}
-		};
-		if (pos) {
-			this.collidableMeshList.splice(pos, 1);
+
+			this.sceneBody.position.x = pos.x;
+			this.sceneBody.position.y = pos.y;
+			this.sceneBody.position.z = pos.z;
+		},
+
+		removeSceneBody: function(body) {
+			var pos;
+			for (var index = 0, count = this.collidableMeshList.length - 1; count >= 0; count--, index++) {
+				if (this.collidableMeshList[index].id === body.id){
+					pos = index;
+					break;
+				}
+			}
+
+			if (pos) {
+				this.collidableMeshList.splice(pos, 1);
+			}
+		},
+
+		getDirectionTo: function (x, y, z) {
+			return new THREE.Vector3(x, y, z).sub(this.sceneBody.position).multiplyScalar(-1).normalize();
+		},
+
+		sceneSetup: function (scene) {
+			var
+			geometry = new THREE.BoxGeometry( 1, 1, 1 ),
+			material = new THREE.MeshPhongMaterial( { color: 0x2E2633} ),
+			body = new THREE.Mesh( geometry, material );
+
+			scene.add(body);
+			this.sceneBody = body;
+		},
+
+		_mousemoveHandler: function (event) {
+			this.mouseX = event.clientX;
+			this.mosueY = event.clientY;
 		}
 	};
 
-	Mouse.prototype.getDirectionTo = function (x, y, z) {
-		return new THREE.Vector3(x, y, z).sub(this.sceneBody.position).multiplyScalar(-1).normalize();
-	}
-
-	Mouse.getInstance = function () {
-		if (instance === null) {
-			instance = new Mouse();
-		}
-		return instance;
-	};
-
-	return Mouse.getInstance();
-
-	function sceneSetup (scene) {
-		var
-		geometry = new THREE.BoxGeometry( 1, 1, 1 ),
-		material = new THREE.MeshPhongMaterial( { color: 0x2E2633} ),
-		body = new THREE.Mesh( geometry, material );
-
-		scene.add(body);
-		this.sceneBody = body;
-	}
-
-	function mousemoveHandler (event) {
-		this.mouseX = event.clientX;
-		this.mosueY = event.clientY;
-	}
+	return new Mouse();
 
 });

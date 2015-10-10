@@ -8,47 +8,41 @@ define([
 ) {
 
 	'use strict';
+	/* globals THREEx */
 
-	var
-	instance = null;
-
-	function	Hub() {
+	function Hub() {
 		this.settings = new dat.GUI();
 	}
 
-	Hub.prototype.init = function (camera, renderer) {
-		this.camera = camera;
-		this.renderer = renderer;
-	};
+	Hub.prototype = {
 
-	Hub.prototype.removeText = function (element) {
-		document.body.removeChild(element);
-	};
+		init : function (camera, renderer) {
+			this.camera = camera;
+			this.renderer = renderer;
+		},
 
-	Hub.prototype.showText = function (sceneeBody, text, cssClass) {
-		var div, position;
+		removeText : function (element) {
+			document.body.removeChild(element);
+		},
 
-		var element = document.createElement('div');
+		showText : function (sceneeBody, text, cssClass) {
+			var position;
 
-		element.innerHTML   = text;
-		element.style.position  = 'absolute';
-		element.className = "message " + cssClass;
+			var element = document.createElement('div');
 
-		var position  	= THREEx.ObjCoord.cssPosition(sceneeBody, this.camera, this.renderer);
+			element.innerHTML   = text;
+			element.style.position  = 'absolute';
+			element.className = 'message ' + cssClass;
 
-		element.style.left  = (position.x-element.offsetWidth /2) +'px';
-		element.style.top   = (position.y-element.offsetHeight/2) - 50 +'px';
-		document.body.appendChild(element);
-		return element;
-	}
+			position = THREEx.ObjCoord.cssPosition(sceneeBody, this.camera, this.renderer);
 
-	Hub.getInstance = function () {
-		if (instance === null) {
-			instance = new Hub();
+			element.style.left  = (position.x-element.offsetWidth /2) +'px';
+			element.style.top   = (position.y-element.offsetHeight/2) - 50 +'px';
+			document.body.appendChild(element);
+			return element;
 		}
-		return instance;
-	}
+	};
 
-	return Hub.getInstance();
+	return new Hub();
 
 });

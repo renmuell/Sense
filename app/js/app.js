@@ -1,17 +1,17 @@
 require.config({
   paths: {
-    three: 'vendors/threejs-r70/three',
-    underscore: 'vendors/underscore-1.7.0/underscore',
-    cannon: 'vendors/cannon-js-0.6.1/cannon',
-    stats: 'vendors/stats-r12/Stats',
-    rendererstats: 'vendors/threex/rendererstats/threex.rendererstats',
+    three: 'vendors/threejs-r72/three',
+    underscore: 'vendors/underscore-1.8.3/underscore',
+    cannon: 'vendors/cannon-js-0.6.2/cannon',
+    stats: 'vendors/stats-0.0.14/stats',
+    rendererstats: 'vendors/threex/threex.rendererstats/threex.rendererstats',
     datGui : 'vendors/dat-gui-js-0.5/dat.gui',
-    emitter: 'vendors-custom/emitter-1.1.3/index',
+    emitter: 'vendors-custom/emitter-1.2.0/emitter',
     textureAnimator: 'vendors-custom/textureAnimator/textureAnimator',
-    objcoord: 'vendors-custom/threex/objcoord/threex.objcoord',
-    jquery: 'vendors/jquery-2.1.3/jquery-2.1.3',
-    bootstrap: 'vendors/bootstrap-3.3.2/js/bootstrap',
-    bootstrapProgressbar : 'vendors/bootstrap-progressbar/js/bootstrap-progressbar'
+    objcoord: 'vendors-custom/threex/threex.objcoord/threex.objcoord',
+    jquery: 'vendors/jquery-2.1.4/jquery-2.1.4',
+    bootstrap: 'vendors/bootstrap-3.3.5/js/bootstrap',
+    bootstrapProgressbar : 'vendors/bootstrap-progressbar-0.9.0/js/bootstrap-progressbar'
   },
   shim: {
     three: {

@@ -56,6 +56,56 @@ body{
 	top:0;left:0;right:0;bottom:0;
 	overflow: hidden;
     display: none;
+
+    .moveKey {
+        margin-top:15px;
+
+        &.sm{
+            marign-top:0px;
+
+            kbd.sm{
+                top: 15px;
+            }
+
+            kbd:first-of-type{
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            kbd:nth-child(4){
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+
+        kbd:first-of-type{
+            margin-left:45px;
+            position: relative;
+            top: -5px;
+        }
+
+        kbd:nth-child(3){
+            margin-right:5px;
+        }
+
+        kbd:nth-child(5){
+            margin-left:5px;
+        }
+    }
+
+    kbd.oneKey{
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 32px;
+
+        &.sm {
+            height: 25px;
+            font-size: 17px;
+            line-height: 20px;
+        }
+    }
 }
 
 #holder {

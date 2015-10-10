@@ -1,19 +1,14 @@
 define([
-	'emitter',
-	'./../core/introPage'
+	'emitter'
 ],function(
-	Emitter,
-	IntroPage
+	Emitter
 ){
 
 	'use strict';
-
-	var
-
-	instance = null;
+	/* globals AudioContext */
 
 	function	BackgroundMusic() {
-		this.context = getAudioContext();
+		this.context = new AudioContext();
 		this._started = false;
 		this._init = false;
 		if (this.context) {
@@ -22,102 +17,85 @@ define([
 		}
 	}
 
-	BackgroundMusic.prototype.load = function (filename) {
-		var that = this;
-		var url = 'media/music/' + filename;
-	  var request = new XMLHttpRequest();
-	  request.open('GET', url, true);
-	  request.responseType = 'arraybuffer';
+	BackgroundMusic.prototype = {
 
-	  // Decode asynchronously
-	  request.onload = function() {
-	    that.context.decodeAudioData(request.response, deodeAudioData_Handler.bind(that));
-	  }
-	  request.send();
-	};
+		load: function (filename) {
+			var url = 'media/music/' + filename,
+					request = new XMLHttpRequest();
 
-	BackgroundMusic.prototype.hasStarted = function () {
-		return this._started;
-	};
+		  request.open('GET', url, true);
+		  request.responseType = 'arraybuffer';
 
-	BackgroundMusic.prototype.play = function () {
-		if (this._started) {
-			this.source.connect(this.analyser);
-			this.source.connect(this.context.destination);
-		} else {
-			this.source.start(0);
-			this._started = true;
-		}
-	};
+		  // Decode asynchronously
+		  request.onload = this._requestOnload.bind({ that: this, request: request });
+		  request.send();
+		},
 
-	BackgroundMusic.prototype.stop = function () {
-		this.source.disconnect();
-	}
+		hasStarted: function () {
+			return this._started;
+		},
 
-	Emitter(BackgroundMusic.prototype);
-
-	BackgroundMusic.getInstance = function () {
-		if (instance === null) {
-			instance = new BackgroundMusic();
-		}
-		return instance;
-	};
-
-	return BackgroundMusic.getInstance();
-
-	function deodeAudioData_Handler (buffer) {
-		if(!buffer) {
-			return;
-		}
-
-		this.sourceJs = this.context.createScriptProcessor(2048, 1, 1);
-		this.sourceJs.buffer = buffer;
-		this.sourceJs.onaudioprocess = onAudioProcess_Handler.bind(this);
-
-		this.analyser = this.context.createAnalyser();
-		this.analyser.smoothingTimeConstant = 0.6;
-		this.analyser.fftSize = 512;
-
-		this.source = this.context.createBufferSource();
-		this.source.buffer = buffer;
-		this.source.loop = true;
-
-		this.sourceJs.connect(this.context.destination);
-		this.analyser.connect(this.sourceJs);
-		this.source.connect(this.analyser);
-		this.source.connect(this.context.destination);
-
-		this.emit('loaded');
-	}
-
-	function onAudioProcess_Handler (e) {
-		this.byteFrequencyData = new Uint8Array(this.analyser.frequencyBinCount);
-		this.analyser.getByteFrequencyData(this.byteFrequencyData);
-		this.boost = 0;
-
-		for (var i = this.byteFrequencyData.length-1 ; i >= 0 ; i--) {
-			this.boost += this.byteFrequencyData[i];
-		}
-
-		this.boost = this.boost / this.byteFrequencyData.length;
-	}
-
-	function deodeAudioData_Error () {
-
-	}
-
-	function getAudioContext () {
-		var context;
-		try {
-			if(typeof webkitAudioContext === 'function') {
-			   context = new webkitAudioContext();
+		play: function () {
+			if (this._started) {
+				this.source.connect(this.analyser);
+				this.source.connect(this.context.destination);
 			} else {
-			   context = new AudioContext();
+				this.source.start(0);
+				this._started = true;
 			}
-		} catch (e) {
+		},
 
+		stop: function () {
+			this.source.disconnect();
+		},
+
+		_requestOnload: function (){
+			var that = this.that,
+					request = this.request;
+
+		    that.context.decodeAudioData(
+		    	request.response,
+		    	that._deodeAudioDataHandler.bind(that));
+		},
+
+		_deodeAudioDataHandler: function (buffer) {
+			if(buffer) {
+				this.sourceJs = this.context.createScriptProcessor(2048, 1, 1);
+				this.sourceJs.buffer = buffer;
+				this.sourceJs.onaudioprocess = this._onAudioProcessHandler.bind(this);
+
+				this.analyser = this.context.createAnalyser();
+				this.analyser.smoothingTimeConstant = 0.6;
+				this.analyser.fftSize = 512;
+
+				this.source = this.context.createBufferSource();
+				this.source.buffer = buffer;
+				this.source.loop = true;
+
+				this.sourceJs.connect(this.context.destination);
+				this.analyser.connect(this.sourceJs);
+				this.source.connect(this.analyser);
+				this.source.connect(this.context.destination);
+
+				this.emit('loaded');
+			}
+		},
+
+		_onAudioProcessHandler: function () {
+			this.byteFrequencyData = new Uint8Array(this.analyser.frequencyBinCount);
+			this.analyser.getByteFrequencyData(this.byteFrequencyData);
+			this.boost = 0;
+
+			for (var i = this.byteFrequencyData.length-1 ; i >= 0 ; i--) {
+				this.boost += this.byteFrequencyData[i];
+			}
+
+			this.boost = this.boost / this.byteFrequencyData.length;
 		}
-		return context;
-	}
+	};
+
+	Emitter(BackgroundMusic.prototype); // jshint ignore:line
+
+	return new BackgroundMusic();
 
 });
