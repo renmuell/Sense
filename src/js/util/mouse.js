@@ -1,8 +1,6 @@
 (function() {
 
-/*global require, module */
-
-var THREE = require('../../vendors_dev/threejs-0.96.0/three');
+/*global module, THREE */
 
 function Mouse() {
 	this.collidableMeshList = [];

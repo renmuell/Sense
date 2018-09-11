@@ -1,10 +1,8 @@
 (function() {
 
-/*global require, module */
+/*global require, module, THREE, CANNON */
 
-var THREE = require('../../../vendors_dev/threejs-0.96.0/three');
-var CANNON = require('../../../vendors_dev/cannon-js-0.6.2/cannon');
-var Emitter = require('../../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('../../util/emitter');
 var TextureAnimator = require('../../../vendors_dev/textureAnimator/textureAnimator');
 var Mouse = require('../../util/mouse');
 var EffectAudio = require('../../util/effectAudio');
@@ -172,7 +170,7 @@ Dummy.prototype = {
 	}
 };
 
-Emitter.default(Dummy.prototype); // jshint ignore:line
+Emitter(Dummy.prototype);
 
 module.exports = Dummy;
 

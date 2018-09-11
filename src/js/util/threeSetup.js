@@ -1,10 +1,7 @@
 (function() {
 
-/*global require, module */
-
-var THREE = require('../../vendors_dev/threejs-0.96.0/three');
-var $ = require('../../vendors_dev/jquery-3.3.1/jquery-3.3.1');
-var dat = require('../../vendors_dev/dat-gui-js-0.7.2/dat.gui');
+/*global require, module, THREE */
+//var dat = require('../../vendors_dev/dat-gui-js-0.7.2/dat.gui');
 var Mouse = require('./mouse');
 var Hub = require('./hub');
 
@@ -48,8 +45,7 @@ ThreeSetup.prototype = {
 		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 
 		var element = this.renderer.domElement;
-		//$(element).addClass('hide');
-		$('#game').append(element);
+		document.getElementById('game').appendChild(element);
 	},
 
 	/*

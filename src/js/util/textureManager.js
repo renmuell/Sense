@@ -1,9 +1,8 @@
 (function() {
 
-/*global require, module */
+/*global require, module, THREE */
 
-var THREE = require('../../vendors_dev/threejs-0.96.0/three');
-var Emitter = require('../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('./emitter');
 
 function TextureManager() {
 	this.textures = {};
@@ -23,7 +22,7 @@ TextureManager.prototype = {
 	},
 };
 
-Emitter.default(TextureManager.prototype); // jshint ignore:line
+Emitter(TextureManager.prototype);
 
 module.exports = new TextureManager();
 

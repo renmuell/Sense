@@ -1,15 +1,13 @@
 (function() {
 
-/*global require, module */
+/*global require, module, CANNON */
 
 var ThreeSetup = require('../util/threeSetup');
-var $ = require('../../vendors_dev/jquery-3.3.1/jquery-3.3.1');
 var Player = require('./entities/player');
 var World = require('./levels/world');
 var Keyboard = require('../util/keyboard');
 var Goal = require('./goal');
 var Projectiles = require('./entities/projectiles');
-var CANNON = require('../../vendors_dev/cannon-js-0.6.2/cannon');
 var Stats = require('../../vendors_dev/stats-0.17.0/stats');
 var BackgroundMusic = require('../util/backgroundMusic');
 var Loader = require('../util/loader');
@@ -20,8 +18,8 @@ function Game () {
 	this.lastFrameTime = undefined;
 
 	Loader.on('loaded', function (){
-		$('#intro').show();
-		$('#load').hide();
+		document.getElementById('intro').classList.remove('hide');
+		document.getElementById('load').classList.add('hide');
 	});
 
 	Loader.load();
@@ -91,7 +89,6 @@ Game.prototype = {
 			}
 		} catch (e) {
 			this.isRunning = false;
-			console.log(e);
 		}
 
 		this.stats.end();
@@ -113,9 +110,10 @@ Game.prototype = {
 	},
 
 	PauseHandler: function () {
-		var that = this;
+		//var that = this;
 
 		if (this.isRunning) {
+			/*
 			$('.ft').removeClass('fa-close').addClass('fa-open').on('webkitAnimationEnd', function(){
 				that.isRunning = false;
 				that.threeSetup.clear();
@@ -126,14 +124,16 @@ Game.prototype = {
 
 				$(this).off('webkitAnimationEnd');
 			});
+			*/
 		} else {
 			this.lastFrameTime = undefined;
 			this.isRunning = true;
+			/*
 			$('.ft').removeClass('fa-open').addClass('fa-close');
 			if (BackgroundMusic.hasStarted()) {
 				BackgroundMusic.play();
 			}
-
+			*/
 			this.frame();
 		}
 	},

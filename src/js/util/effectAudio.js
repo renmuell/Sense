@@ -2,7 +2,7 @@
 
 /*global require, module, AudioContext */
 
-var Emitter = require('../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('./emitter');
 	
 var URL = 'media/effects/{{titel}}.ogg';
 
@@ -56,7 +56,7 @@ EffectAudio.prototype = {
 	}
 };
 
-Emitter.default(EffectAudio.prototype); // jshint ignore:line
+Emitter(EffectAudio.prototype);
 
 module.exports = new EffectAudio();
 

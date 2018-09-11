@@ -1,10 +1,7 @@
 (function() {
 
-/*global require, module */
+/*global require, module, THREE, CANNON */
 
-var $ = require('../../../vendors_dev/jquery-3.3.1/jquery-3.3.1');
-var THREE = require('../../../vendors_dev/threejs-0.96.0/three');
-var CANNON = require('../../../vendors_dev/cannon-js-0.6.2/cannon');
 var Keyboard = require('../../util/keyboard');
 var SMG = require('../weapons/smg');
 var DIR = require('../enum/dir');
@@ -157,7 +154,7 @@ Player.prototype = {
 		setTimeout( function () {
 			Hub.removeText(element);
 		}, GREETING_REMOVE_TIME);
-		$('#intro').addClass('noCursor');
+		document.getElementById('intro').classList.add('noCursor');
 	},
 
 	_CheckDeath: function() {

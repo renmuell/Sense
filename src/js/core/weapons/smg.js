@@ -1,7 +1,7 @@
 (function() {
 
 /*global require, module */
-var Emitter = require('../../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('../../util/emitter');
 var Mouse = require('../../util/mouse');
 var EffectAudio = require('../../util/effectAudio');
 var Projectile = require('../entities/projectile');
@@ -124,7 +124,7 @@ SMG.prototype = {
 
 SMG.FIRE_MODES = FIRE_MODES;
 
-Emitter.default(SMG.prototype); // jshint ignore:line
+Emitter(SMG.prototype);
 
 module.exports = SMG;
 

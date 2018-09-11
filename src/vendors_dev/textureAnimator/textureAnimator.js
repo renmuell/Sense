@@ -1,8 +1,6 @@
 (function() {
 
-/*global require, module */
-	
-var THREE = require('../threejs-0.96.0/three');
+/*global require */
 
 // https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Animation.html
 function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDuration)
@@ -43,7 +41,6 @@ function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDurat
 		}
 	};
 }
-
 
 module.exports = TextureAnimator;
 

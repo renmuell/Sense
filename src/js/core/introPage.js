@@ -2,8 +2,7 @@
 
 /*global require, module */
 
-var $ = require('../../vendors_dev/jquery-3.3.1/jquery-3.3.1');
-var Emitter = require('../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('../util/emitter');
 
 function IntroPage() {
 }
@@ -11,19 +10,16 @@ function IntroPage() {
 IntroPage.prototype = {
 	setup: function () {
 		var that = this;
-
-		$('#intro').addClass('open');
+		document.getElementById('intro').classList.add('open');
 
 		//EffectAudio.play('open');
-
-		$('.start').click(function(){
-			$(this).blur();
+		document.querySelector('.start').addEventListener('click', function(){
 			that.emit('startGame');
-		});
+		})
 	}
 };
 
-Emitter.default(IntroPage.prototype); // jshint ignore:line
+Emitter(IntroPage.prototype);
 
 module.exports = new IntroPage();
 

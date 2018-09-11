@@ -1,11 +1,9 @@
 (function() {
 
-/*global require, module */
+/*global require, module, THREE, CANNON */
 
-var THREE = require('../../../vendors_dev/threejs-0.96.0/three');
-var CANNON = require('../../../vendors_dev/cannon-js-0.6.2/cannon');
 var Hub = require('../../util/hub');
-var EffectAudio = require('../../util/effectAudio');
+//var EffectAudio = require('../../util/effectAudio');
 
 var SIZE = 0.2;
 

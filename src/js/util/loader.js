@@ -5,7 +5,7 @@
 var BackgroundMusic = require('./backgroundMusic');	
 var EffectAudio = require('./effectAudio');	
 var TextureManager = require('./textureManager');
-var Emitter = require('../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('./emitter');
 
 var
 talking = [
@@ -47,13 +47,15 @@ resources = [
 	[EffectAudio, 'shoot'],
 	[EffectAudio, 'zing'],
 	[TextureManager, { name: 'emotion_normal', path: 'media/img/emotion/normal.png' }],
-],
+];
+/*
 progressbarData = {
 	maximum: 100,
 	warningMarker: 100,
 	dangerMarker: 100,
 	step: 100/resources.length
 };
+*/
 
 function Loader() {
 	this.numLoaded = 0;
@@ -87,7 +89,7 @@ Loader.prototype = {
 	}
 };
 
-Emitter.default(Loader.prototype); // jshint ignore:line
+Emitter(Loader.prototype);
 
 module.exports = new Loader();
 

@@ -1,9 +1,8 @@
 (function() {
 
-/*global require, module, AudioContext */
+/*global require, module, AudioContext, THREEx */
 
 var dat = require('../../vendors_dev/dat-gui-js-0.7.2/dat.gui');	
-var THREEx = require('../../vendors_dev/threex/threex.objcoord/threex.objcoord');
 
 function Hub() {
 	this.settings = new dat.GUI();

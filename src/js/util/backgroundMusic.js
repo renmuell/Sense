@@ -1,8 +1,8 @@
 (function() {
 
-/*global require, module, AudioContext */
+/*global require, module, AudioContext, Uint8Array */
 
-var Emitter = require('../../vendors_dev/emitter-2.0.0/emitter');
+var Emitter = require('./emitter');
 
 function BackgroundMusic() {
 	this.context = new AudioContext();
@@ -91,7 +91,7 @@ BackgroundMusic.prototype = {
 	}
 };
 
-Emitter.default(BackgroundMusic.prototype); // jshint ignore:line
+Emitter(BackgroundMusic.prototype);
 
 module.exports = new BackgroundMusic();
 
