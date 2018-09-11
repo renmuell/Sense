@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='uft-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title= Sense
+    meta(name='description', content='Html5 Game - Sense')
+    meta(name='viewport', content='width=device-width')
+    link(rel='stylesheet', href='css/sense.css')
+    link(rel='stylesheet', href='vendors/keyscss/keys.css', type='text/css')
+    link(rel='stylesheet', href='vendors/font-awesome-5.3.1/css/all.css', type='text/css')
+  body
+    include ./intro/intro.jade
+    section#game.hide
+    section#load
+      .container
+        h1 Sense - Loading ...
+    script(src='js/sense.js')

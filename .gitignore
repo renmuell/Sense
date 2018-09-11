@@ -1,6 +1,7 @@
 node_modules
-
+build
+debug
 test/vendors/require.js
-
-build/*
-debug/*
+package-lock.json
+.nyc_output/
+.vscode/

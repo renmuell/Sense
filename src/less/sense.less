@@ -1,0 +1,53 @@
+body{
+	background-color: #ddd;
+	margin:0;
+}
+
+.noCursor{
+	cursor: none;
+}
+
+#intro {
+    z-index: 1;
+}
+
+#game {
+	cursor: none;
+	margin:0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.message {
+	-webkit-animation: m-close 2s ease-in-out;
+	font-family:'Press Start 2P';
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+	padding:10px;
+	color:white;
+    overflow: hidden;
+}
+
+@-webkit-keyframes m-close {
+	to {
+		 transform: translate(0,-100px);
+	}
+}
+
+
+#load {
+    padding-top:100px;
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+    overflow: hidden;
+    background-color: white;
+    z-index: 100000;
+}
+
+.hide {
+	display: none;
+}

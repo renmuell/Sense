@@ -2,8 +2,6 @@
 HTML5 Game
 
 - Work in progress, status: technical prototype
-  - [done] Initial Setup done
-  - [next Step] Performance optimization, Code cleanup
 
 ![](https://raw.githubusercontent.com/renmuell/Sense/master/doc/screenshots/001.png)
 
@@ -14,24 +12,13 @@ HTML5 Game
   - [Cannon.js](http://cannonjs.org/)
   - [dat.GUI](https://code.google.com/p/dat-gui/)
   - [jQuery](http://jquery.com/)
-  - [RequireJs](http://requirejs.org/)
   - [stats.js](https://github.com/mrdoob/stats.js/)
   - [threex.rendererstats](https://github.com/jeromeetienne/threex.rendererstats)
-  - [Underscore.js](http://underscorejs.org/)
-  - [bootstrap-progressbar](https://github.com/geersch/bootstrap-progressbar)
   - [stemkoski.github.com for TextureAnimator()](https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Animation.html)
-- Customize Javascript vendors
-  - [Emitter](https://github.com/component/emitter)
-    - wrapped content inside require js function
+  - [Emitter](https://github.com/jeffrose/emitter)
   - [threex.objcoord](https://github.com/jeromeetienne/threex.objcoord)
-    - updated to three.js r70
-- Test vendors
-  - [mocha.js](https://github.com/mochajs/mocha)
-  - [chai.js](https://github.com/chaijs/chai)
-- Icon / Css / Javascript vendors
-  - [Bootstrap](http://getbootstrap.com/)
+- Icon / Css
   - [Font-Awesome](http://fortawesome.github.io/Font-Awesome/)
-  - [Jasny Bootstrap](http://jasny.github.io/bootstrap/)
   - [KEYS.css](https://github.com/michaelhue/keyscss)
 - Audio vendors [app/media/effects/]
   - [hello.ogg  | freesound.org - Reitanna - hello](http://www.freesound.org/people/Reitanna/sounds/215393/)
@@ -50,17 +37,3 @@ HTML5 Game
   - [kiss.ogg    | freesound.org - Davidou - Bizousoufflé.wav](http://www.freesound.org/people/davidou/sounds/88450/)
 - Music vendors [app/media/music]
   - [slowmotion.mp3 | Royalty Free Music from Bensound - Slow Motion ](http://www.bensound.com/royalty-free-music/track/slow-motion)
-- Software
-  - [Node.js](http://nodejs.org/)
-  - [Yeoman.io](http://yeoman.io/)
-  - [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
-  - [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect)
-  - [grunt-contrib-copy](https://github.com/gruntjs/grunt-contrib-copy)
-  - [grunt-contrib-jade](https://github.com/gruntjs/grunt-contrib-jade)
-  - [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
-  - [grunt-contrib-less](https://github.com/gruntjs/grunt-contrib-less)
-  - [grunt-contrib-requirejs](https://github.com/gruntjs/grunt-contrib-requirejs)
-  - [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
-  - [load-grunt-tasks](https://github.com/sindresorhus/load-grunt-tasks)
-  - [grunt-mocha](https://github.com/kmiyashiro/grunt-mocha)
-  - [time-grunt](https://github.com/sindresorhus/time-grunt)
