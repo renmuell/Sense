@@ -20,6 +20,8 @@ var SIZE = 10;
 function World() {
 	this.worldTiles = [];
 	this.worldGroup = new THREE.Group();
+	this.worldGroup.castShadow = true;
+	this.worldGroup.receiveShadow = true;
 }
 
 World.prototype = {
@@ -171,7 +173,7 @@ World.prototype = {
 		var materials = [];
 
 		for (var index = 0, count = tileSetup.materialsColor.length - 1; count >= 0; index++, count--) {
-			var m = new THREE.MeshBasicMaterial({ color: tileSetup.materialsColor[index] });
+			var m = new THREE.MeshLambertMaterial({ color: tileSetup.materialsColor[index] });
 			m.transparent = true;
 			if (actsToMusic) {
 				m.opacity = 0.8;

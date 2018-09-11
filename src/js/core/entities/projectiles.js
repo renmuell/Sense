@@ -46,7 +46,7 @@ Projectiles.prototype = {
 		return false;
 	},
 
-	logic: function (scene, physicWorld) {
+	logic: function (scene, physicWorld, timeDelta) {
 		for (var index = 0, count = this._container.length - 1; count >= 0; count--, index++) {
 			var projectile = this._container[index];
 			if (projectile) {
@@ -54,7 +54,7 @@ Projectiles.prototype = {
 					projectile.create(scene, physicWorld);
 				}
 
-				projectile.logic();
+				projectile.logic(timeDelta);
 
 				if (projectile.canKill) {
 					projectile.kill(scene, physicWorld);

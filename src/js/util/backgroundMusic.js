@@ -3,6 +3,7 @@
 /*global require, module, AudioContext, Uint8Array */
 
 var Emitter = require('./emitter');
+var Settings = require('../settings');
 
 function BackgroundMusic() {
 	this.context = new AudioContext();
@@ -35,7 +36,7 @@ BackgroundMusic.prototype = {
 	play: function () {
 		if (this._started) {
 			this.source.connect(this.analyser);
-			this.source.connect(this.context.destination);
+			this.source.connect(this.gain);
 		} else {
 			this.source.start(0);
 			this._started = true;
@@ -69,10 +70,14 @@ BackgroundMusic.prototype = {
 			this.source.buffer = buffer;
 			this.source.loop = true;
 
+			this.gain = this.context.createGain();
+			this.gain.gain.value = Settings.audio.music.volume;
+
 			this.sourceJs.connect(this.context.destination);
 			this.analyser.connect(this.sourceJs);
 			this.source.connect(this.analyser);
-			this.source.connect(this.context.destination);
+			this.source.connect(this.gain);
+			this.gain.connect(this.context.destination);
 
 			this.emit('loaded');
 		}

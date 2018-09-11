@@ -3,6 +3,7 @@
 /*global require, module, AudioContext */
 
 var Emitter = require('./emitter');
+var Settings = require('../settings');
 	
 var URL = 'media/effects/{{titel}}.ogg';
 
@@ -42,9 +43,13 @@ EffectAudio.prototype = {
 	 *  @param {string} filename
 	 *  @param {number} volume
 	 */
-	play: function (filename) {
+	play: function (filename, volume) {
 		var src = this.context.createBufferSource(),
 			gain = this.context.createGain();
+
+		volume = volume || 1;
+
+		gain.gain.value = Settings.audio.effects.volume * volume;
 		src.buffer = this.loadedSounds[filename];
 		src.connect(gain);
 		gain.connect(this.context.destination);

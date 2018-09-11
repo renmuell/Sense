@@ -3,7 +3,7 @@ HTML5 Game
 
 - Work in progress, status: technical prototype
 
-![](https://raw.githubusercontent.com/renmuell/Sense/master/doc/screenshots/001.png)
+![](https://raw.githubusercontent.com/renmuell/Sense/master/docs/screenshots/001.png)
 
 ## &#9829; Thanks to
 

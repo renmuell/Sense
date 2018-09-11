@@ -72,10 +72,11 @@ Mouse.prototype = {
 	},
 
 	sceneSetup: function (scene) {
-		var
-		geometry = new THREE.BoxGeometry( 1, 1, 1 ),
-		material = new THREE.MeshPhongMaterial( { color: 0x2E2633} ),
-		body = new THREE.Mesh( geometry, material );
+		var geometry = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
+		var material = new THREE.MeshLambertMaterial( { color: 0x2E2633} );
+		material.transparent = true;
+		material.opacity = 0.4;
+		var body = new THREE.Mesh( geometry, material );
 
 		scene.add(body);
 		this.sceneBody = body;

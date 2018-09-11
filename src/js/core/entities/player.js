@@ -67,7 +67,7 @@ Player.prototype = {
 		this.scene = scene;
 		this.physicWorld = physicWorld;
 
-		this._SetupWeapon(this,scene, physicWorld);
+		this._SetupWeapon(scene, physicWorld);
 		this._SetupScene(scene);
 		this._SetupPhysicWorld(physicWorld);
 	},
@@ -273,7 +273,7 @@ Player.prototype = {
 			START_SETUP.height,
 			START_SETUP.depth);
 
-		this.drawMaterial = new THREE.MeshBasicMaterial( { color: START_SETUP.color } );
+		this.drawMaterial = new THREE.MeshLambertMaterial( { color: START_SETUP.color } );
 
 		this.drawMaterial.opacity = START_OPACITY;
 
@@ -359,25 +359,29 @@ Player.prototype = {
 		this.weapon.on('reloadStart', function() { that._ReloadStartCallbackHanlder(); });
 		this.weapon.on('reloadEnd', function() { that._ReloadEndCallbackHanlder(); });
 
-		window.addEventListener('mousedown', function() { that._MouseDownHandler(); });
-		window.addEventListener('mouseup', function() { that._MouseUpHandler(); });
+		window.addEventListener('mousedown', function(event) { that._MouseDownHandler(event); });
+		window.addEventListener('mouseup', function(event) { that._MouseUpHandler(event); });
 	},
 
 	/* --------------------------------------------------------------------------
 	/* Callback
 	/* ----------------------------------------------------------------------- */
 
-	_MouseDownHandler: function () {
-		this.weapon.pullTrigger();
-		if (!this.weapon.isReloading) {
-			this.drawBody.material.color = new THREE.Color(COLOR_SHOOT);
+	_MouseDownHandler: function (event) {
+		if (event.which === 1) {
+			this.weapon.pullTrigger();
+			if (!this.weapon.isReloading) {
+				this.drawBody.material.color = new THREE.Color(COLOR_SHOOT);
+			}
 		}
 	},
 
-	_MouseUpHandler: function () {
-		this.weapon.releaseTrigger();
-		if (!this.weapon.isReloading) {
-			this.drawBody.material.color = new THREE.Color(COLOR_NORMAL);
+	_MouseUpHandler: function (event) {
+		if (event.which === 1) {
+			this.weapon.releaseTrigger();
+			if (!this.weapon.isReloading) {
+				this.drawBody.material.color = new THREE.Color(COLOR_NORMAL);
+			}
 		}
 	},
 

@@ -19,6 +19,17 @@ function ThreeSetup () {
 
 	Mouse.init(this.scene, this.camera);
 	Hub.init(this.camera, this.renderer);
+	var that = this;
+	window.addEventListener( 'resize', function (){
+
+		that.camera.aspect = window.innerWidth / window.innerHeight;
+		that.camera.updateProjectionMatrix();
+
+		that.renderer.setSize( window.innerWidth, window.innerHeight );
+
+	});
+
+	
 }
 
 ThreeSetup.prototype = {
@@ -92,29 +103,29 @@ ThreeSetup.prototype = {
 
 	_lightSetup: function() {
 	
-		//this.ambientLight = new THREE.AmbientLight(0x333333);
-		//this.scene.add(this.ambientLight);
+		this.ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+		this.scene.add(this.ambientLight);
 
-		this.directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
+		this.directionalLight = new THREE.DirectionalLight( 0xffffff, 0.2);
 		this.directionalLight.position.set(-25, -25, 25);
 		this.directionalLight.lookAt(this.scene.position);
 
 		this.directionalLight.castShadow = true;
-		this.directionalLight.shadow.camera.near = 20;
-		this.directionalLight.shadow.camera.far = 120;
-		this.directionalLight.shadow.camera.left = -40;
-		this.directionalLight.shadow.camera.right = 40;
-		this.directionalLight.shadow.camera.top = 40;
-		this.directionalLight.shadow.camera.bottom = -40;
+		this.directionalLight.shadow.camera.near = 0;
+		this.directionalLight.shadow.camera.far = 80;
+		this.directionalLight.shadow.camera.left = -50;
+		this.directionalLight.shadow.camera.right = 50;
+		this.directionalLight.shadow.camera.top = 50;
+		this.directionalLight.shadow.camera.bottom = -50;
 
-		this.directionalLight.shadow.mapSize.width = 1000;
-		this.directionalLight.shadow.mapSize.height = 1000;
+		//this.directionalLight.shadow.mapSize.width = 1000;
+		//this.directionalLight.shadow.mapSize.height = 1000;
 		this.scene.add(this.directionalLight);
 
 		//this.helper = new THREE.CameraHelper( this.directionalLight.shadow.camera )
 		//this.scene.add(this.helper);
 
-		//this.scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1));
+		//this.scene.add(new THREE.HemisphereLight(0xffffbb, 0x080820, 1));
 
 	},
 

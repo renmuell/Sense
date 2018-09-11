@@ -41,7 +41,7 @@ function Game () {
 		that.endGame();
 	});
 
-	this.StatsSetup();
+	//this.StatsSetup();
 }
 
 Game.prototype = {
@@ -68,7 +68,7 @@ Game.prototype = {
 		var timeDelta,
 				that = this;
 
-		this.stats.begin();
+		//this.stats.begin();
 
 		try {
 			if (this.isRunning) {
@@ -91,12 +91,12 @@ Game.prototype = {
 			this.isRunning = false;
 		}
 
-		this.stats.end();
+		//this.stats.end();
 	},
 
 	logic: function  (timeDelta) {
 		Player.Logic(timeDelta);
-		Projectiles.logic(this.scene, this.physicWorld);
+		Projectiles.logic(this.scene, this.physicWorld, timeDelta);
 		World.logic(timeDelta);
 		Goal.logic(timeDelta, this.threeSetup.camera);
 	},

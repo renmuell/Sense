@@ -5,7 +5,7 @@
 var dat = require('../../vendors_dev/dat-gui-js-0.7.2/dat.gui');	
 
 function Hub() {
-	this.settings = new dat.GUI();
+	//this.settings = new dat.GUI();
 }
 
 Hub.prototype = {

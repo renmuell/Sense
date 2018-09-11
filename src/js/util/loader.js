@@ -47,6 +47,7 @@ resources = [
 	[EffectAudio, 'shoot'],
 	[EffectAudio, 'zing'],
 	[TextureManager, { name: 'emotion_normal', path: 'media/img/emotion/normal.png' }],
+	[TextureManager, { name: 'emotion_ohh', path: 'media/img/emotion/ohh.png' }]
 ];
 /*
 progressbarData = {

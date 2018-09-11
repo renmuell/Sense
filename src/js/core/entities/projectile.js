@@ -7,6 +7,8 @@ var Hub = require('../../util/hub');
 
 var SIZE = 0.2;
 
+var KILL_OFFSET_MS = 3000;
+
 /***
  *       _____                _                   _
  *      / ____|              | |                 | |
@@ -19,6 +21,8 @@ var SIZE = 0.2;
 
 function Projectile(config) {
 	this.isCreated = false;
+	this.timeTillKill = 0;
+	this.freeze = false;
 	this.canKill = false;
 
 	/*
@@ -50,13 +54,23 @@ Projectile.prototype = {
 		this.sceneSetup(scene);
 	},
 
-	logic: function () {
-		this.sceneBody.position.copy(this.physicBody.position);
-		this.sceneBody.quaternion.copy(this.physicBody.quaternion);
+	logic: function (timeDelta) {
+		
+		if (this.freeze) {
+			//this.physicBody.velocity.set(0,0,0);
+			if (this.timeTillKill <= 0) {
+				this.canKill = true;
+			} else {
+				this.timeTillKill -= timeDelta;
+			}
+		}// else {
+			this.sceneBody.position.copy(this.physicBody.position);
+			this.sceneBody.quaternion.copy(this.physicBody.quaternion);
 
-		if (this.physicBody.position.z < -50) {
-			this.canKill = true;
-		}
+			if (this.physicBody.position.z < -50) {
+				this.canKill = true;
+			}
+		//}
 	},
 
 	getPhysicBodyId: function () {
@@ -79,9 +93,9 @@ Projectile.prototype = {
 	 */
 
 	_physicSetup: function (physicWorld) {
-		var	that = this,
-				body = new CANNON.Body({ mass: this.config.mass }),
-				shape = new CANNON.Box(new CANNON.Vec3( SIZE/2, SIZE/2, SIZE/2));
+		var	that 	= this,
+			body 	= new CANNON.Body({ mass: this.config.mass }),
+			shape 	= new CANNON.Box(new CANNON.Vec3( SIZE/2, SIZE/2, SIZE/2));
 
 		body.addShape(shape);
 
@@ -89,21 +103,26 @@ Projectile.prototype = {
 
 		body.velocity.set(
 			this.config.direction.x * this.config.velocity,
-		this.config.direction.y * this.config.velocity,
-		this.config.direction.z * this.config.velocity);
+			this.config.direction.y * this.config.velocity, 
+			this.config.direction.z * this.config.velocity);
 
 		body.position.set(
 			this.config.position.x,
 			this.config.position.y,
 			this.config.position.z);
 
-			body.addEventListener('collide', function(){
+		body.addEventListener('collide', function(){
+			if (that.freeze == false) {
 				var element = Hub.showText(that.sceneBody, 'Hit', '');
 				setTimeout( function () {
 					Hub.removeText(element);
 				}, 200);
 				//EffectAudio.play('hit', 0.01);
-				that.canKill = true;
+				//body.mass = 0;
+				body.velocity.set(0,0,0); // if not set, projectiles jump around, very cool :)
+				that.timeTillKill = KILL_OFFSET_MS;
+				that.freeze = true;
+			}
 		});
 
 		this.physicBody = body;
@@ -111,15 +130,15 @@ Projectile.prototype = {
 
 	sceneSetup: function (scene) {
 		var	geometry = new THREE.BoxGeometry(SIZE, SIZE, SIZE),
-				material = new THREE.MeshLambertMaterial({ color: 0xBE371E }),
-				body = new THREE.Mesh(geometry, material);
+			material = new THREE.MeshLambertMaterial({ color: 0xDA4D5E }),
+			body 	 = new THREE.Mesh(geometry, material);
 
 		scene.add(body);
 
 		body.position.set(
-		this.config.position.x,
-		this.config.position.y,
-		this.config.position.z);
+			this.config.position.x,
+			this.config.position.y,
+			this.config.position.z);
 
 		this.sceneBody = body;
 	}
