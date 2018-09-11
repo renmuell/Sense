@@ -58,3 +58,12 @@ body {
 #intro td {
   padding: 20px;
 }
+#intro .start {
+  font-size: 22px;
+  border-radius: 20px;
+  padding: 20px;
+  background: #a9a2f7;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
